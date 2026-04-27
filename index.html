@@ -41,8 +41,6 @@
             --text-light: #cbd5e1;
             --border: #334155;
             --accent-soft: #2d1a0c;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
         }
 
         body {
@@ -143,7 +141,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Cards y elementos responsivos */
+        /* Cards */
         .card {
             background: var(--card);
             border-radius: var(--radius-card);
@@ -340,6 +338,7 @@
             border: none;
             font-size: 0.85rem;
             margin-top: 8px;
+            width: 100%;
         }
 
         /* Mobile */
@@ -437,7 +436,6 @@
         th, td { padding: 12px 8px; border-bottom: 1px solid var(--border); text-align: left; }
         progress { width: 100%; height: 8px; border-radius: 10px; }
 
-        /* Responsive */
         @media (max-width: 1000px) {
             .pos-layout { grid-template-columns: 1fr; gap: 20px; }
             .pos-cart { max-height: 50vh; }
@@ -504,17 +502,17 @@
 
         <!-- Productos -->
         <section class="panel" id="panel-products">
-            <div class="card"><div class="card-header"><h3>Inventario</h3><button class="btn btn-accent btn-sm" id="btnAddProduct">+ Agregar</button></div><div class="table-wrap"><table><thead><tr><th>Producto</th><th>Precio</th><th>Costo</th><th>Stock</th><th>Cat.</th><th></th></tr></thead><tbody id="productsTableBody"></tbody></table></div></div>
+            <div class="card"><div class="card-header"><h3>Inventario</h3><button class="btn btn-accent btn-sm" id="btnAddProduct">+ Agregar</button></div><div class="table-wrap">能<table><thead><tr><th>Producto</th><th>Precio</th><th>Costo</th><th>Stock</th><th>Cat.</th><th></th></tr></thead><tbody id="productsTableBody"></tbody>}</table></div></div>
         </section>
 
-        <!-- Gastos completos -->
+        <!-- Gastos -->
         <section class="panel" id="panel-expenses">
             <div class="card"><h3>Resumen Gastos</h3><div id="expenseStats" class="stat-row"></div></div>
             <div class="card"><h3>Distribución por categoría</h3><div id="expenseBars"></div></div>
             <div class="card"><div class="card-header"><h3>Lista de Gastos</h3><button class="btn btn-accent btn-sm" id="btnAddExpense">+ Agregar gasto</button></div><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Descripción</th><th>Categoría</th><th>Monto</th><th></th></tr></thead><tbody id="expensesTableBody"></tbody></table></div></div>
         </section>
 
-        <!-- Atención al cliente con mensaje editable -->
+        <!-- Atención al cliente (sin número mostrado, solo mensaje editable) -->
         <section class="panel" id="panel-support">
             <div class="whatsapp-hero">
                 <i class="fab fa-whatsapp"></i>
@@ -522,14 +520,14 @@
                 <p>Contáctanos directamente por WhatsApp para consultas, pedidos o soporte</p>
                 <div class="contact-buttons">
                     <a id="whatsappLink" href="#" target="_blank" class="btn btn-whatsapp" style="background: white; color:#25D366;"><i class="fab fa-whatsapp"></i> Enviar mensaje</a>
-                    <button id="copyPhoneBtn" class="btn btn-outline" style="background: rgba(255,255,255,0.2); color:white; border-color:white;"><i class="fas fa-copy"></i> Copiar número</button>
                 </div>
-                <p style="margin-top: 8px;">Número registrado: <strong id="supportPhoneDisplay">+1234567890</strong></p>
                 <div class="default-message-box">
-                    <label><i class="fas fa-comment-dots"></i> Mensaje predeterminado (editable)</label>
-                    <textarea id="defaultWhatsAppMessage" rows="3" style="background: white; color:#0f172a;">Hola, me interesa información sobre sus productos y servicios. ¿Podrían ayudarme?</textarea>
-                    <button id="copyMessageBtn" class="btn btn-sm" style="margin-top: 8px; background: white; color:#25D366;"><i class="fas fa-copy"></i> Copiar mensaje</button>
-                    <button id="sendWithMessageBtn" class="btn btn-sm" style="margin-top: 8px; background: #25D366; color:white;"><i class="fab fa-whatsapp"></i> Enviar con este mensaje</button>
+                    <label><i class="fas fa-comment-dots"></i> Mensaje personalizado (editable)</label>
+                    <textarea id="defaultWhatsAppMessage" rows="4" style="background: white; color:#0f172a;"></textarea>
+                    <div style="display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;">
+                        <button id="copyMessageBtn" class="btn btn-sm" style="background: white; color:#25D366;"><i class="fas fa-copy"></i> Copiar mensaje</button>
+                        <button id="sendWithMessageBtn" class="btn btn-sm" style="background: #25D366; color:white;"><i class="fab fa-whatsapp"></i> Enviar con este mensaje</button>
+                    </div>
                 </div>
             </div>
             <div class="card">
@@ -600,7 +598,8 @@
             const setupDiv = document.createElement('div'); setupDiv.id='setupModal'; setupDiv.className='modal-overlay'; setupDiv.style.display=isFirstTime?'flex':'none'; setupDiv.innerHTML=`<div class="modal-card"><h2><i class="fas fa-handshake"></i> Bienvenido</h2><p>Configura tu negocio</p><label>Nombre</label><input id="setupBusinessName" placeholder="Ej: Cafetería"><label>Moneda</label><input id="setupCurrency" value="$" maxlength="3"><button class="btn btn-accent" id="completeSetupBtn" style="margin-top:20px; width:100%;">Iniciar</button></div>`; document.body.appendChild(setupDiv);
             document.getElementById('completeSetupBtn')?.addEventListener('click',()=>{ let biz=document.getElementById('setupBusinessName').value.trim(); if(!biz) return; settings.businessName=biz; settings.currency=document.getElementById('setupCurrency').value.trim()||'$'; save(STORAGE.settings,settings); setupDiv.style.display='none'; loadDataAndInit(); });
             
-            function loadDataAndInit(){ settings=load(STORAGE.settings); if(!settings.businessName) settings={ businessName:'Mi Negocio', currency:'$', darkMode:false, logoBase64:'', facebook:'', instagram:'', whatsapp:'', phone:'', email:'', address:'' }; products=load(STORAGE.products); sales=load(STORAGE.sales); expenses=load(STORAGE.expenses); applyUI(); initEvents(); renderAll(); renderCart(); updateBusinessPreview(); updateSupportSection(); }
+            function loadDataAndInit(){ settings=load(STORAGE.settings); if(!settings.businessName) settings={ businessName:'Mi Negocio', currency:'$', darkMode:false, logoBase64:'', facebook:'', instagram:'', whatsapp:'', phone:'', email:'', address:'' }; products=load(STORAGE.products); sales=load(STORAGE.sales); expenses=load(STORAGE.expenses); applyUI(); initEvents(); renderAll(); renderCart(); updateBusinessPreview(); updateDefaultMessage(); updateSupportLink(); }
+            
             function applyUI(){ 
                 document.getElementById('businessNameDisplay').innerText=settings.businessName;
                 document.getElementById('settingsBusinessName').value=settings.businessName;
@@ -617,19 +616,36 @@
                 else { logoPrev.innerHTML='<i class="fas fa-store"></i>'; sidebarIcon.innerHTML='<i class="fas fa-store"></i>'; }
                 if(settings.darkMode) document.body.classList.add('dark'); else document.body.classList.remove('dark');
             }
-            function updateSupportSection(){
-                const phone = settings.whatsapp || settings.phone || '+1234567890';
-                document.getElementById('supportPhoneDisplay').innerText = phone;
-                let cleanPhone = phone.replace(/\s+/g, '').replace(/[^0-9+]/g, '');
-                if(!cleanPhone.startsWith('+')) cleanPhone = '+' + cleanPhone;
-                const defaultMsg = document.getElementById('defaultWhatsAppMessage').value;
-                const encodedMsg = encodeURIComponent(defaultMsg);
-                document.getElementById('whatsappLink').href = `https://wa.me/${cleanPhone}?text=${encodedMsg}`;
-                document.getElementById('copyPhoneBtn').onclick = () => { navigator.clipboard.writeText(phone); showAlert('Número copiado'); };
-                document.getElementById('copyMessageBtn').onclick = () => { const msg = document.getElementById('defaultWhatsAppMessage').value; navigator.clipboard.writeText(msg); showAlert('Mensaje copiado'); };
-                document.getElementById('sendWithMessageBtn').onclick = () => { const msg = document.getElementById('defaultWhatsAppMessage').value; window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank'); };
+
+            // Generar mensaje predeterminado con todos los datos del negocio
+            function generateDefaultMessage() {
+                let msg = `¡Hola! 👋\n\nTe invitamos a conocer ${settings.businessName || "nuestro negocio"}.`;
+                if (settings.address) msg += `\n📍 Dirección: ${settings.address}`;
+                if (settings.phone) msg += `\n📞 Teléfono: ${settings.phone}`;
+                if (settings.email) msg += `\n✉️ Email: ${settings.email}`;
+                if (settings.whatsapp) msg += `\n📱 WhatsApp: ${settings.whatsapp}`;
+                msg += `\n\n🛍️ Consulta nuestros productos, promociones y servicios. ¡Estamos para servirte!`;
+                return msg;
             }
-            function persistAll(){ save(STORAGE.products,products); save(STORAGE.sales,sales); save(STORAGE.expenses,expenses); save(STORAGE.settings,settings); updateBusinessPreview(); applyUI(); updateSupportSection(); }
+
+            function updateDefaultMessage() {
+                const textarea = document.getElementById('defaultWhatsAppMessage');
+                if (textarea && !textarea.dataset.userEdited) {
+                    textarea.value = generateDefaultMessage();
+                }
+            }
+
+            function updateSupportLink() {
+                const phone = settings.whatsapp || settings.phone || '';
+                let cleanPhone = phone.replace(/\s+/g, '').replace(/[^0-9+]/g, '');
+                if (cleanPhone && !cleanPhone.startsWith('+')) cleanPhone = '+' + cleanPhone;
+                const msg = document.getElementById('defaultWhatsAppMessage')?.value || generateDefaultMessage();
+                const encodedMsg = encodeURIComponent(msg);
+                document.getElementById('whatsappLink').href = `https://wa.me/${cleanPhone || ''}?text=${encodedMsg}`;
+            }
+
+            function persistAll(){ save(STORAGE.products,products); save(STORAGE.sales,sales); save(STORAGE.expenses,expenses); save(STORAGE.settings,settings); updateBusinessPreview(); applyUI(); updateDefaultMessage(); updateSupportLink(); }
+            
             function buildCardHTML(){ 
                 let logoHtml = settings.logoBase64 ? `<img src="${settings.logoBase64}" style="width:50px; height:50px; border-radius:20px;">` : '<i class="fas fa-store" style="font-size:32px;"></i>';
                 let socials = ''; if(settings.facebook) socials+=`<a href="${settings.facebook}" target="_blank" style="background:rgba(255,255,255,0.2); padding:6px 12px; border-radius:40px;"><i class="fab fa-facebook-f"></i> FB</a> `;
@@ -642,7 +658,7 @@
             }
             function updateBusinessPreview(){ let cont = document.getElementById('businessCardBeauty'); if(cont) cont.innerHTML = buildCardHTML(); }
 
-            // Funciones de carrito, productos, gastos
+            // Funciones de carrito, productos, gastos (igual que antes)
             window.addToCart = async (id)=>{ let p=products.find(x=>x.id===id); if(!p || p.stock<=0){ await showAlert('Sin stock'); return; } let ex=cart.find(i=>i.productId===id); if(ex){ if(ex.quantity>=p.stock){ await showAlert('Stock máximo'); return; } ex.quantity++; } else cart.push({ productId:id, name:p.name, price:p.price, cost:p.cost||0, quantity:1 }); renderCart(); renderPOS(); };
             function renderCart(){ let total=cart.reduce((s,i)=>s+i.price*i.quantity,0); document.getElementById('cartTotal').innerText=settings.currency+total.toFixed(2); let count=cart.reduce((s,i)=>s+i.quantity,0); let badge=document.getElementById('cartCountBadge'); badge.style.display=count?'inline':'none'; badge.innerText=count; let div=document.getElementById('cartItems'); if(!cart.length) div.innerHTML='<div style="text-align:center;padding:30px;"><i class="fas fa-shopping-cart"></i> Vacío</div>'; else div.innerHTML=cart.map((item,idx)=>`<div class="cart-item"><span style="flex:1;">${item.name}</span><span>${settings.currency}${item.price.toFixed(2)}</span><input type="number" value="${item.quantity}" min="1" style="width:60px;" onchange="updateCartQty(${idx}, this.value)"><button class="btn-sm" style="background:#ef4444; color:white; border:none; border-radius:30px; padding:6px 12px;" onclick="removeFromCart(${idx})"><i class="fas fa-trash"></i></button></div>`).join(''); }
             window.updateCartQty=(idx,val)=>{ cart[idx].quantity=Math.max(1,parseInt(val)||1); renderCart(); renderPOS(); };
@@ -667,8 +683,9 @@
                 persistAll(); await showAlert('Datos guardados'); const modal=document.getElementById('cardModal'); document.getElementById('dynamicCardPreview').innerHTML=buildCardHTML(); modal.style.display='flex';
                 document.getElementById('modalDownloadBtn').onclick = () => { html2canvas(document.getElementById('dynamicCardPreview'),{scale:2}).then(c=>{ let a=document.createElement('a'); a.download='tarjeta.png'; a.href=c.toDataURL(); a.click(); }); };
                 document.getElementById('closeModalBtn').onclick = () => modal.style.display='none';
+                updateDefaultMessage(); updateSupportLink();
             }
-            function renderAll(){ renderPOS(); renderProductsTable(); renderExpenses(); renderExpenseStats(); renderExpenseBars(); renderDashboard(); renderHistory(); populateQRSelect(); updateBusinessPreview(); updateSupportSection(); }
+            function renderAll(){ renderPOS(); renderProductsTable(); renderExpenses(); renderExpenseStats(); renderExpenseBars(); renderDashboard(); renderHistory(); populateQRSelect(); updateBusinessPreview(); }
             
             function initEvents(){
                 document.getElementById('posSearch').addEventListener('input',()=>renderPOS()); document.getElementById('categoryFilter').addEventListener('change',()=>renderPOS());
@@ -690,7 +707,11 @@
                 document.getElementById('downloadCardImageBtn').onclick=()=>{ let el=document.querySelector('#businessCardBeauty'); if(el) html2canvas(el,{scale:2}).then(c=>{ let a=document.createElement('a'); a.download='tarjeta.png'; a.href=c.toDataURL(); a.click(); }); };
                 document.getElementById('qrProductSelect').onchange=function(){ let id=this.value; let container=document.getElementById('qrContainer'); if(!id){ container.style.display='none'; return; } container.style.display='block'; document.getElementById('qrCanvas').innerHTML=''; let p=products.find(x=>x.id===id); if(p) new QRCode(document.getElementById('qrCanvas'),{ text:`${p.name} - ${settings.currency}${p.price}`, width:150, height:150 }); };
                 document.getElementById('btnDownloadQr').onclick=()=>{ let canvas=document.querySelector('#qrCanvas canvas'); if(canvas){ let a=document.createElement('a'); a.download='qr.png'; a.href=canvas.toDataURL(); a.click(); } };
-                document.getElementById('defaultWhatsAppMessage').addEventListener('input', () => updateSupportSection());
+                // Mensaje de atención
+                const msgTextarea = document.getElementById('defaultWhatsAppMessage');
+                msgTextarea.addEventListener('input', () => { msgTextarea.dataset.userEdited = 'true'; updateSupportLink(); });
+                document.getElementById('copyMessageBtn').onclick = () => { navigator.clipboard.writeText(msgTextarea.value); showAlert('Mensaje copiado al portapapeles'); };
+                document.getElementById('sendWithMessageBtn').onclick = () => { updateSupportLink(); const link = document.getElementById('whatsappLink').href; if(link && link.includes('wa.me')) window.open(link, '_blank'); else showAlert('Configura un número de WhatsApp en Configuración'); };
             }
             function closeSidebarMobile(){ if(window.innerWidth<=900) document.getElementById('sidebar').classList.remove('open'); }
             function navigateTo(panel){
@@ -702,7 +723,7 @@
                 document.querySelector(`.mobile-nav-inner button[data-panel="${panel}"]`)?.classList.add('active');
                 if(panel==='pos') renderPOS(); else if(panel==='dashboard') renderDashboard(); else if(panel==='products') renderProductsTable();
                 else if(panel==='expenses'){ renderExpenses(); renderExpenseStats(); renderExpenseBars(); }
-                else if(panel==='support') updateSupportSection(); else if(panel==='businesscard') updateBusinessPreview();
+                else if(panel==='support'){ updateDefaultMessage(); updateSupportLink(); } else if(panel==='businesscard') updateBusinessPreview();
                 else if(panel==='qr') populateQRSelect(); else if(panel==='history') renderHistory();
                 document.getElementById('moreMenu').style.display='none'; closeSidebarMobile();
             }
