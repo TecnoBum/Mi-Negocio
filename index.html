@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Mi Negocio - Punto de Venta Pro</title>
+    <title>Punto de Venta Pro | Mi Negocio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -27,16 +27,12 @@
             --border: #e2e8f0;
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.03);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.01);
             --radius-card: 24px;
-            --radius-sm: 14px;
-            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body.dark {
             --bg: #0f172a;
             --card: #1e293b;
-            --primary: #020617;
             --text: #f1f5f9;
             --text-light: #cbd5e1;
             --border: #334155;
@@ -52,7 +48,7 @@
             overflow-x: hidden;
         }
 
-        /* Sidebar */
+        /* Sidebar Desktop */
         .sidebar {
             width: 270px;
             background: var(--card);
@@ -86,13 +82,6 @@
             justify-content: center;
             overflow: hidden;
         }
-        .brand-icon img, .brand-icon i {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            font-size: 28px;
-            color: var(--accent);
-        }
         .sidebar-nav {
             flex: 1;
             padding: 20px 12px;
@@ -113,7 +102,7 @@
             font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.2s;
             text-align: left;
             width: 100%;
         }
@@ -121,27 +110,19 @@
         .sidebar-nav button:hover { background: var(--accent-soft); color: var(--accent); }
         .sidebar-nav button.active { background: var(--accent); color: white; box-shadow: 0 4px 8px rgba(249,115,22,0.2); }
 
-        /* MAIN */
+        /* Main content */
         .main {
             flex: 1;
             margin-left: 270px;
             padding: 28px 32px;
             min-height: 100vh;
             transition: margin 0.3s ease;
-            overflow-x: auto;
         }
 
-        .panel {
-            display: none;
-            animation: fadeUp 0.35s ease;
-        }
+        .panel { display: none; animation: fadeUp 0.3s ease; }
         .panel.active { display: block; }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Cards */
         .card {
             background: var(--card);
             border-radius: var(--radius-card);
@@ -149,18 +130,8 @@
             margin-bottom: 24px;
             border: 1px solid var(--border);
             box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            width: 100%;
-            overflow-x: auto;
         }
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
         .btn {
             display: inline-flex;
             align-items: center;
@@ -171,19 +142,14 @@
             font-size: 0.85rem;
             border: none;
             cursor: pointer;
-            transition: var(--transition);
-            background: transparent;
-            white-space: nowrap;
+            transition: all 0.2s;
         }
         .btn-accent { background: var(--accent); color: white; }
-        .btn-accent:hover { background: #ea580c; transform: scale(0.98); }
-        .btn-whatsapp { background: #25D366; color: white; }
-        .btn-whatsapp:hover { background: #128C7E; }
+        .btn-accent:hover { background: var(--accent-dark); transform: scale(0.97); }
         .btn-outline { border: 1.5px solid var(--border); color: var(--text); background: var(--card); }
         .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
         .btn-danger { background: #ef4444; color: white; }
         .btn-sm { padding: 6px 14px; font-size: 0.75rem; }
-
         input, select, textarea {
             width: 100%;
             padding: 12px 16px;
@@ -192,550 +158,441 @@
             background: var(--card);
             color: var(--text);
             font-family: inherit;
-            transition: var(--transition);
         }
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
-        }
+        input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(249,115,22,0.1); }
 
-        /* POS Layout */
-        .pos-layout {
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 24px;
-            min-height: calc(100vh - 120px);
-        }
-        .pos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 16px;
-            overflow-y: auto;
-            max-height: calc(100vh - 200px);
-            padding: 4px;
-        }
-        .pos-product-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 18px 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
+        /* POS grid */
+        .pos-layout { display: grid; grid-template-columns: 1fr 380px; gap: 24px; min-height: calc(100vh - 120px); }
+        .pos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; max-height: calc(100vh - 200px); overflow-y: auto; padding: 4px; }
+        .pos-product-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 18px 12px; text-align: center; cursor: pointer; transition: all 0.2s; }
         .pos-product-card:hover { transform: translateY(-4px); border-color: var(--accent); }
-        .pos-cart {
-            background: var(--card);
-            border-radius: 28px;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            max-height: calc(100vh - 120px);
-        }
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            flex-wrap: wrap;
-        }
-        .stat-row {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-        }
-        .stat-card {
-            background: var(--card);
-            border-radius: 28px;
-            padding: 22px;
-            flex: 1;
-            min-width: 170px;
-            text-align: center;
-            border: 1px solid var(--border);
-        }
-        .stat-card strong { font-size: 2rem; color: var(--accent); display: block; margin-bottom: 8px; }
+        .pos-cart { background: var(--card); border-radius: 28px; border: 1px solid var(--border); display: flex; flex-direction: column; max-height: calc(100vh - 120px); }
+        .cart-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .stat-row { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
+        .stat-card { background: var(--card); border-radius: 28px; padding: 22px; flex: 1; min-width: 170px; text-align: center; border: 1px solid var(--border); }
+        .stat-card strong { font-size: 2rem; color: var(--accent); display: block; }
 
-        /* Configuración */
-        .settings-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .settings-fullwidth {
-            grid-column: span 2;
-        }
-        .settings-section {
-            background: var(--card);
-            border-radius: 24px;
-            padding: 20px;
-            border: 1px solid var(--border);
-        }
-        .settings-section h4 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            margin-bottom: 18px;
-            color: var(--accent);
-            border-left: 4px solid var(--accent);
-            padding-left: 12px;
-        }
-        .logo-upload-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin: 16px 0;
-        }
-        .logo-preview-large {
-            width: 80px;
-            height: 80px;
-            background: var(--accent-soft);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        /* Atención al cliente */
-        .whatsapp-hero {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            border-radius: 32px;
-            padding: 28px;
-            text-align: center;
-            color: white;
-            margin-bottom: 24px;
-        }
-        .whatsapp-hero i { font-size: 64px; margin-bottom: 16px; }
-        .contact-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-        .default-message-box {
-            background: rgba(255,255,255,0.15);
-            border-radius: 20px;
-            padding: 16px;
-            margin-top: 20px;
-            text-align: left;
-        }
-        .default-message-box textarea {
-            background: white;
-            color: #0f172a;
-            border: none;
-            font-size: 0.85rem;
-            margin-top: 8px;
-            width: 100%;
-        }
-
-        /* Mobile */
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--card);
-            border-top: 1px solid var(--border);
-            z-index: 1100;
-            height: 65px;
-        }
-        .mobile-nav-inner {
-            display: flex;
-            height: 100%;
-        }
-        .mobile-nav-inner button {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            border: none;
-            background: transparent;
-            color: var(--text-light);
-            font-size: 0.7rem;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        .mobile-nav-inner button i { font-size: 1.3rem; }
-        .mobile-nav-inner button.active { color: var(--accent); transform: translateY(-2px); }
-        .more-menu {
-            position: fixed;
-            bottom: 80px;
-            right: 16px;
-            background: var(--card);
-            backdrop-filter: blur(20px);
-            border-radius: 32px;
-            padding: 12px 8px;
-            display: none;
-            flex-direction: column;
-            gap: 8px;
-            min-width: 180px;
-            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.3);
-            border: 1px solid var(--border);
-            z-index: 1200;
-        }
-        .more-menu button {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 12px 16px;
-            border: none;
-            background: transparent;
-            color: var(--text);
-            border-radius: 28px;
-            width: 100%;
-            cursor: pointer;
-        }
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-card {
-            background: var(--card);
-            border-radius: 48px;
-            max-width: 480px;
-            width: 90%;
-            padding: 24px;
-            box-shadow: var(--shadow-lg);
-        }
-        .business-card-beauty {
-            background: linear-gradient(135deg, var(--accent) 0%, #dc2626 100%);
-            border-radius: 32px;
-            padding: 20px;
-            color: white;
-        }
-        .business-card-inner {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            padding: 20px;
-        }
+        .settings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .settings-fullwidth { grid-column: span 2; }
+        .business-card-beauty { background: linear-gradient(135deg, var(--accent) 0%, #dc2626 100%); border-radius: 32px; padding: 20px; color: white; }
+        .business-card-inner { background: rgba(255,255,255,0.15); backdrop-filter: blur(12px); border-radius: 28px; padding: 20px; }
         .table-wrap { overflow-x: auto; width: 100%; }
         table { width: 100%; min-width: 500px; border-collapse: collapse; }
         th, td { padding: 12px 8px; border-bottom: 1px solid var(--border); text-align: left; }
-        progress { width: 100%; height: 8px; border-radius: 10px; }
 
-        @media (max-width: 1000px) {
-            .pos-layout { grid-template-columns: 1fr; gap: 20px; }
-            .pos-cart { max-height: 50vh; }
-            .pos-grid { max-height: 40vh; }
-        }
-        @media (max-width: 900px) {
-            .main { margin-left: 0; padding: 20px 16px; padding-bottom: 85px; }
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.open { transform: translateX(0); }
-            .mobile-nav { display: block; }
-            .settings-grid { grid-template-columns: 1fr; }
-            .settings-fullwidth { grid-column: span 1; }
-        }
-        @media (max-width: 480px) {
-            .card { padding: 16px; }
-            .btn { padding: 8px 12px; font-size: 0.75rem; }
-            .stat-card strong { font-size: 1.5rem; }
-        }
+        /* Mobile */
+        .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); border-top: 1px solid var(--border); z-index: 1100; height: 65px; }
+        .mobile-nav-inner { display: flex; height: 100%; }
+        .mobile-nav-inner button { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border: none; background: transparent; color: var(--text-light); font-size: 0.7rem; cursor: pointer; }
+        .mobile-nav-inner button i { font-size: 1.3rem; }
+        .mobile-nav-inner button.active { color: var(--accent); }
+        .more-menu { position: fixed; bottom: 80px; right: 16px; background: var(--card); border-radius: 32px; padding: 12px 8px; display: none; flex-direction: column; gap: 8px; min-width: 180px; box-shadow: 0 20px 35px -8px rgba(0,0,0,0.3); border: 1px solid var(--border); z-index: 1200; }
+        .help-fab { position: fixed; bottom: 24px; right: 24px; background: var(--accent); color: white; width: 56px; height: 56px; border-radius: 28px; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); cursor: pointer; z-index: 1300; transition: all 0.2s; border: none; }
+        .help-fab:hover { transform: scale(1.05); background: var(--accent-dark); }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center; }
+        .modal-card { background: var(--card); border-radius: 48px; max-width: 480px; width: 90%; padding: 24px; }
+        .tutorial-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 2100; display: flex; align-items: center; justify-content: center; }
+        .tutorial-card { background: var(--card); border-radius: 40px; max-width: 460px; width: 90%; padding: 28px; text-align: center; }
+        .highlight-element { position: relative; z-index: 2150; box-shadow: 0 0 0 4px var(--accent), 0 0 0 8px rgba(249,115,22,0.3); border-radius: 20px; transition: all 0.2s; }
+        @media (max-width: 1000px) { .pos-layout { grid-template-columns: 1fr; } .pos-cart { max-height: 50vh; } }
+        @media (max-width: 900px) { .main { margin-left: 0; padding: 20px 16px 85px; } .sidebar { transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } .mobile-nav { display: block; } .settings-grid { grid-template-columns: 1fr; } .settings-fullwidth { grid-column: span 1; } .help-fab { bottom: 80px; } }
     </style>
 </head>
 <body>
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-brand">
-            <div class="brand-icon" id="sidebarIconPreview"><i class="fas fa-store"></i></div>
-            <span id="businessNameDisplay">Mi Negocio</span>
-        </div>
-        <nav class="sidebar-nav">
-            <button data-panel="pos" class="active"><i class="fas fa-cash-register"></i> Vender</button>
-            <button data-panel="dashboard"><i class="fas fa-chart-line"></i> Dashboard</button>
-            <button data-panel="products"><i class="fas fa-boxes"></i> Productos</button>
-            <button data-panel="expenses"><i class="fas fa-coins"></i> Gastos</button>
-            <button data-panel="support"><i class="fab fa-whatsapp"></i> Atención</button>
-            <button data-panel="businesscard"><i class="fas fa-id-card"></i> Tarjeta</button>
-            <button data-panel="qr"><i class="fas fa-qrcode"></i> QR</button>
-            <button data-panel="history"><i class="fas fa-history"></i> Historial</button>
-            <button data-panel="settings"><i class="fas fa-cog"></i> Configuración</button>
-        </nav>
-    </aside>
-
-    <nav class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-inner">
-            <button data-panel="pos" class="active"><i class="fas fa-cash-register"></i><span>Vender</span></button>
-            <button data-panel="products"><i class="fas fa-box"></i><span>Prod.</span></button>
-            <button data-panel="expenses"><i class="fas fa-coins"></i><span>Gastos</span></button>
-            <button id="btnMoreMenu"><i class="fas fa-ellipsis-h"></i><span>Más</span></button>
-        </div>
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><div class="brand-icon" id="sidebarIconPreview"><i class="fas fa-store"></i></div><span id="businessNameDisplay">Mi Negocio</span></div>
+    <nav class="sidebar-nav">
+        <button data-panel="pos" class="active"><i class="fas fa-cash-register"></i> Vender</button>
+        <button data-panel="dashboard"><i class="fas fa-chart-line"></i> Dashboard</button>
+        <button data-panel="products"><i class="fas fa-boxes"></i> Productos</button>
+        <button data-panel="expenses"><i class="fas fa-coins"></i> Gastos</button>
+        <button data-panel="support"><i class="fab fa-whatsapp"></i> Atención</button>
+        <button data-panel="businesscard"><i class="fas fa-id-card"></i> Tarjeta</button>
+        <button data-panel="qr"><i class="fas fa-qrcode"></i> QR</button>
+        <button data-panel="history"><i class="fas fa-history"></i> Historial</button>
+        <button data-panel="settings"><i class="fas fa-cog"></i> Configuración</button>
     </nav>
-    <div class="more-menu" id="moreMenu"></div>
+</aside>
+<nav class="mobile-nav"><div class="mobile-nav-inner"><button data-panel="pos" class="active"><i class="fas fa-cash-register"></i><span>Vender</span></button><button data-panel="products"><i class="fas fa-box"></i><span>Prod.</span></button><button data-panel="expenses"><i class="fas fa-coins"></i><span>Gastos</span></button><button id="btnMoreMenu"><i class="fas fa-ellipsis-h"></i><span>Más</span></button></div></nav>
+<div class="more-menu" id="moreMenu"></div>
+<button class="help-fab" id="helpButton"><i class="fas fa-question"></i></button>
 
-    <main class="main" id="mainContent">
-        <!-- POS -->
-        <section class="panel active" id="panel-pos">
-            <div class="pos-layout">
-                <div><div style="display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;"><div style="flex:1; position:relative;"><i class="fas fa-search" style="position:absolute; left:16px; top:50%; transform:translateY(-50%);"></i><input type="text" id="posSearch" placeholder="Buscar producto" style="padding-left:42px;"></div><div style="width:170px; position:relative;"><i class="fas fa-barcode" style="position:absolute; left:16px; top:50%;"></i><input type="text" id="barcodeInput" placeholder="Código"></div><select id="categoryFilter" style="width:140px;"></select></div><div class="pos-grid" id="posProductGrid"></div></div>
-                <div class="pos-cart"><div style="padding:18px; font-weight:700;"><i class="fas fa-shopping-cart"></i> Carrito <span id="cartCountBadge" style="background:#ef4444; border-radius:30px; padding:2px 10px; margin-left:8px; display:none;">0</span></div><div id="cartItems" style="flex:1; overflow-y:auto;"></div><div style="padding:18px; border-top:1px solid var(--border);"><div style="display:flex; justify-content:space-between; font-weight:800;"><span>Total</span><span id="cartTotal">$0.00</span></div><button class="btn btn-accent" style="width:100%; margin-top:16px;" id="btnCheckout">Cobrar ahora</button></div></div>
-            </div>
-        </section>
+<main class="main" id="mainContent">
+    <section class="panel active" id="panel-pos"><div class="pos-layout"><div><div style="display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;"><div style="flex:1; position:relative;"><i class="fas fa-search" style="position:absolute; left:16px; top:50%; transform:translateY(-50%);"></i><input type="text" id="posSearch" placeholder="Buscar producto" style="padding-left:42px;"></div><div style="width:170px; position:relative;"><i class="fas fa-barcode" style="position:absolute; left:16px; top:50%;"></i><input type="text" id="barcodeInput" placeholder="Código"></div><select id="categoryFilter" style="width:140px;"></select></div><div class="pos-grid" id="posProductGrid"></div></div><div class="pos-cart"><div style="padding:18px; font-weight:700;"><i class="fas fa-shopping-cart"></i> Carrito <span id="cartCountBadge" style="background:#ef4444; border-radius:30px; padding:2px 10px; margin-left:8px; display:none;">0</span></div><div id="cartItems" style="flex:1; overflow-y:auto;"></div><div style="padding:18px; border-top:1px solid var(--border);"><div style="display:flex; justify-content:space-between; font-weight:800;"><span>Total</span><span id="cartTotal">$0.00</span></div><button class="btn btn-accent" style="width:100%; margin-top:16px;" id="btnCheckout">Cobrar ahora</button></div></div></div></section>
+    <section class="panel" id="panel-dashboard"><div class="stat-row" id="dashboardStats"></div><div class="card"><h3>Ventas de Hoy</h3><div id="todaySalesTable"></div></div></section>
+    <section class="panel" id="panel-products"><div class="card"><div class="card-header"><h3>Inventario</h3><button class="btn btn-accent btn-sm" id="btnAddProduct">+ Agregar</button></div><div class="table-wrap"><table><thead><tr><th>Producto</th><th>Precio</th><th>Costo</th><th>Stock</th><th>Cat.</th><th></th></tr></thead><tbody id="productsTableBody"></tbody></table></div></div></section>
+    <section class="panel" id="panel-expenses"><div class="card"><h3>Resumen Gastos</h3><div id="expenseStats" class="stat-row"></div></div><div class="card"><h3>Distribución por categoría</h3><div id="expenseBars"></div></div><div class="card"><div class="card-header"><h3>Lista de Gastos</h3><button class="btn btn-accent btn-sm" id="btnAddExpense">+ Agregar gasto</button></div><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Descripción</th><th>Categoría</th><th>Monto</th><th></th></tr></thead><tbody id="expensesTableBody"></tbody></table></div></div></section>
+    <section class="panel" id="panel-support"><div class="whatsapp-hero" style="background:linear-gradient(135deg,#25D366 0%,#128C7E 100%); border-radius:32px; padding:28px; text-align:center; color:white; margin-bottom:24px;"><i class="fab fa-whatsapp" style="font-size:64px;"></i><h2>Atención al Cliente</h2><p>Contáctanos directamente por WhatsApp</p><div class="contact-buttons"><a id="whatsappLink" href="#" target="_blank" class="btn" style="background:white; color:#25D366;"><i class="fab fa-whatsapp"></i> Enviar mensaje</a></div><div class="default-message-box" style="background:rgba(255,255,255,0.15); border-radius:20px; padding:16px; margin-top:20px;"><label><i class="fas fa-comment-dots"></i> Mensaje personalizado</label><textarea id="defaultWhatsAppMessage" rows="3" style="background:white; color:#0f172a; border:none;"></textarea><div style="display:flex; gap:12px; margin-top:12px;"><button id="copyMessageBtn" class="btn btn-sm" style="background:white; color:#25D366;"><i class="fas fa-copy"></i> Copiar</button><button id="sendWithMessageBtn" class="btn btn-sm" style="background:#25D366; color:white;"><i class="fab fa-whatsapp"></i> Enviar</button></div></div></div><div class="card"><h3><i class="fas fa-clock"></i> Horario de atención</h3><p>Lun a Vie: 9:00 - 18:00<br>Sáb: 10:00 - 14:00</p><hr><h3>Preguntas frecuentes</h3><ul style="padding-left:20px;"><li>📦 Disponibilidad de productos</li><li>🚚 Envíos y tiempos</li><li>💳 Métodos de pago</li></ul></div></section>
+    <section class="panel" id="panel-businesscard"><div class="card"><h3>Mi Tarjeta Digital</h3><div id="businessCardBeauty" class="business-card-beauty"></div><div style="display:flex; gap:12px; margin-top:20px; justify-content:center;"><button id="shareCardBtn" class="btn btn-accent">Compartir</button><button id="downloadCardImageBtn" class="btn btn-outline">Guardar imagen</button></div></div></section>
+    <section class="panel" id="panel-qr"><div class="card"><h3>QR de Producto</h3><select id="qrProductSelect"><option value="">-- Elegir --</option></select><div id="qrContainer" style="margin-top:20px; display:none;"><div id="qrCanvas"></div><button class="btn btn-outline btn-sm" id="btnDownloadQr">Descargar QR</button></div></div></section>
+    <section class="panel" id="panel-history"><div class="card"><div class="card-header"><h3>Historial de Ventas</h3><button class="btn btn-outline btn-sm" id="btnClearHistory">Limpiar</button></div><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Items</th><th>Total</th></tr></thead><tbody id="historyTableBody"></tbody></table></div></div></section>
+    <section class="panel" id="panel-settings"><div class="card"><h3><i class="fas fa-sliders-h"></i> Configuración General</h3><div class="settings-grid"><div class="settings-section"><h4><i class="fas fa-store"></i> Negocio</h4><label>Nombre</label><input type="text" id="settingsBusinessName"><label>Moneda</label><input type="text" id="settingsCurrency" maxlength="3"><div style="margin-top:16px;"><label><input type="checkbox" id="darkModeToggle"> Modo Oscuro</label></div></div><div class="settings-section"><h4><i class="fas fa-image"></i> Logo</h4><div class="logo-upload-area" style="display:flex; gap:16px; align-items:center;"><div id="logoPreviewLarge" style="width:80px; height:80px; background:var(--accent-soft); border-radius:24px; display:flex; align-items:center; justify-content:center; overflow:hidden;"><i class="fas fa-store"></i></div><input type="file" id="businessLogoUpload" accept="image/*"></div></div><div class="settings-section settings-fullwidth"><h4><i class="fas fa-share-alt"></i> Redes y Contacto</h4><div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;"><div><label>Facebook</label><input type="url" id="socialFacebook"><label>Instagram</label><input type="url" id="socialInstagram"><label>WhatsApp (número)</label><input type="tel" id="socialWhatsapp" placeholder="+1234567890"></div><div><label>Teléfono</label><input type="tel" id="contactPhone"><label>Email</label><input type="email" id="contactEmail"><label>Dirección</label><textarea id="contactAddress" rows="2"></textarea></div></div><button class="btn btn-accent" id="saveBusinessInfoBtn" style="margin-top:20px;"><i class="fas fa-save"></i> Guardar datos</button></div><div class="settings-section settings-fullwidth"><h4><i class="fas fa-database"></i> Respaldos</h4><div class="action-buttons" style="display:flex; gap:12px; flex-wrap:wrap;"><button class="btn btn-outline btn-sm" id="btnExportData"><i class="fas fa-upload"></i> Exportar</button><button class="btn btn-outline btn-sm" id="btnImportData"><i class="fas fa-download"></i> Importar</button><button class="btn btn-danger btn-sm" id="btnResetData"><i class="fas fa-exclamation-triangle"></i> Resetear todo</button></div><input type="file" id="importFileInput" accept=".json" style="display:none;"></div></div></div></section>
+</main>
 
-        <!-- Dashboard -->
-        <section class="panel" id="panel-dashboard">
-            <div class="stat-row" id="dashboardStats"></div>
-            <div class="card"><h3>Ventas de Hoy</h3><div id="todaySalesTable"></div></div>
-        </section>
+<div id="globalModal" class="modal-overlay"><div class="modal-card"><h3 id="modalTitle">Aviso</h3><p id="modalMessage" style="margin:16px 0;"></p><div style="display:flex; gap:12px; justify-content:center;"><button class="btn btn-accent" id="modalConfirmBtn">Aceptar</button><button class="btn btn-outline" id="modalCancelBtn" style="display:none;">Cancelar</button></div></div></div>
+<div id="modalProduct" class="modal-overlay"><div style="background:var(--card); border-radius:32px; width:90%; max-width:400px; padding:24px;"><h3>Producto</h3><input id="prodName" placeholder="Nombre"><br><br><input id="prodPrice" type="number" step="0.01" placeholder="Precio"><br><br><input id="prodCost" type="number" step="0.01" placeholder="Costo"><br><br><input id="prodStock" type="number" placeholder="Stock"><br><br><input id="prodCategory" placeholder="Categoría"><br><br><input id="prodBarcode" placeholder="Código"><br><br><div style="display:flex; gap:12px;"><button class="btn btn-outline" onclick="closeModal('modalProduct')">Cancelar</button><button class="btn btn-accent" id="saveProductBtn">Guardar</button></div></div></div>
+<div id="modalExpense" class="modal-overlay"><div style="background:var(--card); border-radius:32px; width:90%; max-width:400px; padding:24px;"><h3>Gasto</h3><input id="expDesc" placeholder="Descripción"><br><br><input id="expAmount" type="number" step="0.01" placeholder="Monto"><br><br><select id="expCategory"><option>Insumos</option><option>Servicios</option><option>Alquiler</option><option>Otros</option></select><br><br><div style="display:flex; gap:12px;"><button class="btn btn-outline" onclick="closeModal('modalExpense')">Cancelar</button><button class="btn btn-accent" id="saveExpenseBtn">Guardar</button></div></div></div>
+<div id="cardModal" class="modal-overlay"><div class="modal-card"><h3 style="text-align:center;">Tarjeta profesional</h3><div id="dynamicCardPreview" class="business-card-beauty"></div><div style="display:flex; justify-content:center; gap:12px; margin-top:20px;"><button id="modalDownloadBtn" class="btn btn-accent">Descargar imagen</button><button id="closeModalBtn" class="btn btn-outline">Cerrar</button></div></div></div>
 
-        <!-- Productos -->
-        <section class="panel" id="panel-products">
-            <div class="card"><div class="card-header"><h3>Inventario</h3><button class="btn btn-accent btn-sm" id="btnAddProduct">+ Agregar</button></div><div class="table-wrap">能<table><thead><tr><th>Producto</th><th>Precio</th><th>Costo</th><th>Stock</th><th>Cat.</th><th></th></tr></thead><tbody id="productsTableBody"></tbody>}</table></div></div>
-        </section>
+<script>
+    (function() {
+        // ---------- CONSTANTES Y ESTADO ----------
+        const STORAGE = { products: 'negocio_products', sales: 'negocio_sales', expenses: 'negocio_expenses', settings: 'negocio_settings' };
+        let products = [], sales = [], expenses = [];
+        let settings = { businessName: 'Mi Negocio', currency: '$', darkMode: false, logoBase64: '', facebook: '', instagram: '', whatsapp: '', phone: '', email: '', address: '' };
+        let cart = [];
+        let editingProductId = null;
 
-        <!-- Gastos -->
-        <section class="panel" id="panel-expenses">
-            <div class="card"><h3>Resumen Gastos</h3><div id="expenseStats" class="stat-row"></div></div>
-            <div class="card"><h3>Distribución por categoría</h3><div id="expenseBars"></div></div>
-            <div class="card"><div class="card-header"><h3>Lista de Gastos</h3><button class="btn btn-accent btn-sm" id="btnAddExpense">+ Agregar gasto</button></div><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Descripción</th><th>Categoría</th><th>Monto</th><th></th></tr></thead><tbody id="expensesTableBody"></tbody></table></div></div>
-        </section>
+        // ---------- UTILS ----------
+        function saveAll() {
+            localStorage.setItem(STORAGE.products, JSON.stringify(products));
+            localStorage.setItem(STORAGE.sales, JSON.stringify(sales));
+            localStorage.setItem(STORAGE.expenses, JSON.stringify(expenses));
+            localStorage.setItem(STORAGE.settings, JSON.stringify(settings));
+        }
+        function loadAll() {
+            products = JSON.parse(localStorage.getItem(STORAGE.products) || '[]');
+            sales = JSON.parse(localStorage.getItem(STORAGE.sales) || '[]');
+            expenses = JSON.parse(localStorage.getItem(STORAGE.expenses) || '[]');
+            const savedSettings = JSON.parse(localStorage.getItem(STORAGE.settings) || '{}');
+            settings = { ...settings, ...savedSettings };
+        }
+        function showAlert(msg, title = 'Aviso') {
+            return new Promise((resolve) => {
+                document.getElementById('modalTitle').innerText = title;
+                document.getElementById('modalMessage').innerText = msg;
+                document.getElementById('modalCancelBtn').style.display = 'none';
+                document.getElementById('modalConfirmBtn').style.display = 'inline-flex';
+                document.getElementById('globalModal').style.display = 'flex';
+                const handler = () => {
+                    document.getElementById('globalModal').style.display = 'none';
+                    document.getElementById('modalConfirmBtn').removeEventListener('click', handler);
+                    resolve();
+                };
+                document.getElementById('modalConfirmBtn').addEventListener('click', handler, { once: true });
+            });
+        }
+        function showConfirm(msg, title = 'Confirmar') {
+            return new Promise((resolve) => {
+                document.getElementById('modalTitle').innerText = title;
+                document.getElementById('modalMessage').innerText = msg;
+                document.getElementById('modalCancelBtn').style.display = 'inline-flex';
+                document.getElementById('modalConfirmBtn').style.display = 'inline-flex';
+                document.getElementById('globalModal').style.display = 'flex';
+                const confirmCb = () => { cleanup(); resolve(true); };
+                const cancelCb = () => { cleanup(); resolve(false); };
+                const cleanup = () => {
+                    document.getElementById('globalModal').style.display = 'none';
+                    document.getElementById('modalConfirmBtn').removeEventListener('click', confirmCb);
+                    document.getElementById('modalCancelBtn').removeEventListener('click', cancelCb);
+                };
+                document.getElementById('modalConfirmBtn').addEventListener('click', confirmCb, { once: true });
+                document.getElementById('modalCancelBtn').addEventListener('click', cancelCb, { once: true });
+            });
+        }
+        window.closeModal = (id) => document.getElementById(id).style.display = 'none';
 
-        <!-- Atención al cliente (sin número mostrado, solo mensaje editable) -->
-        <section class="panel" id="panel-support">
-            <div class="whatsapp-hero">
-                <i class="fab fa-whatsapp"></i>
-                <h2>Atención al Cliente</h2>
-                <p>Contáctanos directamente por WhatsApp para consultas, pedidos o soporte</p>
-                <div class="contact-buttons">
-                    <a id="whatsappLink" href="#" target="_blank" class="btn btn-whatsapp" style="background: white; color:#25D366;"><i class="fab fa-whatsapp"></i> Enviar mensaje</a>
-                </div>
-                <div class="default-message-box">
-                    <label><i class="fas fa-comment-dots"></i> Mensaje personalizado (editable)</label>
-                    <textarea id="defaultWhatsAppMessage" rows="4" style="background: white; color:#0f172a;"></textarea>
-                    <div style="display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;">
-                        <button id="copyMessageBtn" class="btn btn-sm" style="background: white; color:#25D366;"><i class="fas fa-copy"></i> Copiar mensaje</button>
-                        <button id="sendWithMessageBtn" class="btn btn-sm" style="background: #25D366; color:white;"><i class="fab fa-whatsapp"></i> Enviar con este mensaje</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <h3><i class="fas fa-clock"></i> Horario de atención</h3>
-                <p>Lunes a Viernes: 9:00 - 18:00<br>Sábados: 10:00 - 14:00</p>
-                <hr>
-                <h3><i class="fas fa-question-circle"></i> Preguntas frecuentes</h3>
-                <ul style="margin-top: 8px; padding-left: 20px;">
-                    <li>📦 Consulta disponibilidad de productos</li>
-                    <li>🚚 Envíos y tiempos de entrega</li>
-                    <li>💳 Métodos de pago aceptados</li>
-                    <li>🔄 Cambios y devoluciones</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Tarjeta de presentación -->
-        <section class="panel" id="panel-businesscard">
-            <div class="card"><h3>Mi Tarjeta Digital</h3><div id="businessCardBeauty" class="business-card-beauty"></div><div style="display:flex; gap:12px; margin-top:20px; justify-content:center; flex-wrap:wrap;"><button id="shareCardBtn" class="btn btn-accent">Compartir</button><button id="downloadCardImageBtn" class="btn btn-outline">Guardar imagen</button></div></div>
-        </section>
-
-        <!-- QR -->
-        <section class="panel" id="panel-qr">
-            <div class="card"><h3>QR de Producto</h3><select id="qrProductSelect"><option value="">-- Elegir --</option></select><div id="qrContainer" style="margin-top:20px; display:none;"><div id="qrCanvas"></div><button class="btn btn-outline btn-sm" id="btnDownloadQr">Descargar QR</button></div></div>
-        </section>
-
-        <!-- Historial -->
-        <section class="panel" id="panel-history">
-            <div class="card"><div class="card-header"><h3>Historial de Ventas</h3><button class="btn btn-outline btn-sm" id="btnClearHistory">Limpiar</button></div><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Items</th><th>Total</th></tr></thead><tbody id="historyTableBody"></tbody></table></div></div>
-        </section>
-
-        <!-- Configuración -->
-        <section class="panel" id="panel-settings">
-            <div class="card">
-                <h3><i class="fas fa-sliders-h"></i> Configuración General</h3>
-                <div class="settings-grid">
-                    <div class="settings-section"><h4><i class="fas fa-store"></i> Negocio</h4><label>Nombre</label><input type="text" id="settingsBusinessName"><label>Moneda</label><input type="text" id="settingsCurrency" maxlength="3"><div style="margin-top:16px;"><label><input type="checkbox" id="darkModeToggle"> Modo Oscuro</label></div></div>
-                    <div class="settings-section"><h4><i class="fas fa-image"></i> Logo</h4><div class="logo-upload-area"><div id="logoPreviewLarge" class="logo-preview-large"><i class="fas fa-store"></i></div><input type="file" id="businessLogoUpload" accept="image/*"></div></div>
-                    <div class="settings-section settings-fullwidth"><h4><i class="fas fa-share-alt"></i> Redes y Contacto</h4><div class="settings-grid" style="gap:16px;"><div><label><i class="fab fa-facebook-f"></i> Facebook</label><input type="url" id="socialFacebook"><label><i class="fab fa-instagram"></i> Instagram</label><input type="url" id="socialInstagram"><label><i class="fab fa-whatsapp"></i> WhatsApp (número)</label><input type="tel" id="socialWhatsapp" placeholder="+1234567890"></div><div><label><i class="fas fa-phone-alt"></i> Teléfono</label><input type="tel" id="contactPhone"><label><i class="fas fa-envelope"></i> Email</label><input type="email" id="contactEmail"><label><i class="fas fa-map-marker-alt"></i> Dirección</label><textarea id="contactAddress" rows="2"></textarea></div></div><button class="btn btn-accent" id="saveBusinessInfoBtn" style="margin-top:20px;"><i class="fas fa-save"></i> Guardar datos</button></div>
-                    <div class="settings-section settings-fullwidth"><h4><i class="fas fa-database"></i> Respaldos</h4><div class="action-buttons"><button class="btn btn-outline btn-sm" id="btnExportData"><i class="fas fa-upload"></i> Exportar</button><button class="btn btn-outline btn-sm" id="btnImportData"><i class="fas fa-download"></i> Importar</button><button class="btn btn-danger btn-sm" id="btnResetData"><i class="fas fa-exclamation-triangle"></i> Resetear todo</button></div><input type="file" id="importFileInput" accept=".json" style="display:none;"></div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Modales -->
-    <div id="globalModal" class="modal-overlay"><div class="modal-card"><h3 id="modalTitle">Aviso</h3><p id="modalMessage" style="margin:16px 0;"></p><div style="display:flex; gap:12px; justify-content:center;"><button class="btn btn-accent" id="modalConfirmBtn">Aceptar</button><button class="btn btn-outline" id="modalCancelBtn" style="display:none;">Cancelar</button></div></div></div>
-    <div id="modalProduct" class="modal-overlay"><div style="background:var(--card); border-radius:32px; width:90%; max-width:400px; padding:24px;"><h3>Producto</h3><input id="prodName" placeholder="Nombre"><br><br><input id="prodPrice" type="number" step="0.01" placeholder="Precio"><br><br><input id="prodCost" type="number" step="0.01" placeholder="Costo"><br><br><input id="prodStock" type="number" placeholder="Stock"><br><br><input id="prodCategory" placeholder="Categoría"><br><br><input id="prodBarcode" placeholder="Código"><br><br><div style="display:flex; gap:12px;"><button class="btn btn-outline" onclick="closeModal('modalProduct')">Cancelar</button><button class="btn btn-accent" id="saveProductBtn">Guardar</button></div></div></div>
-    <div id="modalExpense" class="modal-overlay"><div style="background:var(--card); border-radius:32px; width:90%; max-width:400px; padding:24px;"><h3>Gasto</h3><input id="expDesc" placeholder="Descripción"><br><br><input id="expAmount" type="number" step="0.01" placeholder="Monto"><br><br><select id="expCategory"><option>Insumos</option><option>Servicios</option><option>Alquiler</option><option>Otros</option></select><br><br><div style="display:flex; gap:12px;"><button class="btn btn-outline" onclick="closeModal('modalExpense')">Cancelar</button><button class="btn btn-accent" id="saveExpenseBtn">Guardar</button></div></div></div>
-    <div id="cardModal" class="modal-overlay"><div class="modal-card"><h3 style="text-align:center;">Tarjeta profesional</h3><div id="dynamicCardPreview" class="business-card-beauty"></div><div style="display:flex; justify-content:center; gap:12px; margin-top:20px;"><button id="modalDownloadBtn" class="btn btn-accent">Descargar imagen</button><button id="closeModalBtn" class="btn btn-outline">Cerrar</button></div></div></div>
-
-    <script>
-        (function(){
-            const STORAGE = { products: 'minegocio_products', sales: 'minegocio_sales', expenses: 'minegocio_expenses', settings: 'minegocio_settings' };
-            function load(key) { try { return JSON.parse(localStorage.getItem(key)) || []; } catch { return []; } }
-            function save(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
-            let products = [], sales = [], expenses = [];
-            let settings = { businessName:'', currency:'$', darkMode:false, logoBase64:'', facebook:'', instagram:'', whatsapp:'', phone:'', email:'', address:'' };
-            let cart = [], editingProductId = null;
-
-            const modalAlert = document.getElementById('globalModal');
-            function showAlert(msg, title='Aviso') { return new Promise((resolve)=>{ document.getElementById('modalTitle').innerText=title; document.getElementById('modalMessage').innerText=msg; document.getElementById('modalCancelBtn').style.display='none'; document.getElementById('modalConfirmBtn').style.display='inline-flex'; modalAlert.style.display='flex'; const handler = ()=>{ modalAlert.style.display='none'; document.getElementById('modalConfirmBtn').removeEventListener('click',handler); resolve(); }; document.getElementById('modalConfirmBtn').addEventListener('click',handler,{once:true}); }); }
-            function showConfirm(msg, title='Confirmar') { return new Promise((resolve)=>{ document.getElementById('modalTitle').innerText=title; document.getElementById('modalMessage').innerText=msg; document.getElementById('modalCancelBtn').style.display='inline-flex'; document.getElementById('modalConfirmBtn').style.display='inline-flex'; modalAlert.style.display='flex'; const confirmCb=()=>{ cleanup(); resolve(true); }; const cancelCb=()=>{ cleanup(); resolve(false); }; const cleanup=()=>{ modalAlert.style.display='none'; document.getElementById('modalConfirmBtn').removeEventListener('click',confirmCb); document.getElementById('modalCancelBtn').removeEventListener('click',cancelCb); }; document.getElementById('modalConfirmBtn').addEventListener('click',confirmCb,{once:true}); document.getElementById('modalCancelBtn').addEventListener('click',cancelCb,{once:true}); }); }
-            window.closeModal = (id) => { document.getElementById(id).style.display='none'; };
-
-            // Setup inicial
-            const isFirstTime = !localStorage.getItem(STORAGE.settings) || !load(STORAGE.settings).businessName;
-            const setupDiv = document.createElement('div'); setupDiv.id='setupModal'; setupDiv.className='modal-overlay'; setupDiv.style.display=isFirstTime?'flex':'none'; setupDiv.innerHTML=`<div class="modal-card"><h2><i class="fas fa-handshake"></i> Bienvenido</h2><p>Configura tu negocio</p><label>Nombre</label><input id="setupBusinessName" placeholder="Ej: Cafetería"><label>Moneda</label><input id="setupCurrency" value="$" maxlength="3"><button class="btn btn-accent" id="completeSetupBtn" style="margin-top:20px; width:100%;">Iniciar</button></div>`; document.body.appendChild(setupDiv);
-            document.getElementById('completeSetupBtn')?.addEventListener('click',()=>{ let biz=document.getElementById('setupBusinessName').value.trim(); if(!biz) return; settings.businessName=biz; settings.currency=document.getElementById('setupCurrency').value.trim()||'$'; save(STORAGE.settings,settings); setupDiv.style.display='none'; loadDataAndInit(); });
-            
-            function loadDataAndInit(){ settings=load(STORAGE.settings); if(!settings.businessName) settings={ businessName:'Mi Negocio', currency:'$', darkMode:false, logoBase64:'', facebook:'', instagram:'', whatsapp:'', phone:'', email:'', address:'' }; products=load(STORAGE.products); sales=load(STORAGE.sales); expenses=load(STORAGE.expenses); applyUI(); initEvents(); renderAll(); renderCart(); updateBusinessPreview(); updateDefaultMessage(); updateSupportLink(); }
-            
-            function applyUI(){ 
-                document.getElementById('businessNameDisplay').innerText=settings.businessName;
-                document.getElementById('settingsBusinessName').value=settings.businessName;
-                document.getElementById('settingsCurrency').value=settings.currency;
-                document.getElementById('darkModeToggle').checked=settings.darkMode;
-                document.getElementById('socialFacebook').value=settings.facebook||'';
-                document.getElementById('socialInstagram').value=settings.instagram||'';
-                document.getElementById('socialWhatsapp').value=settings.whatsapp||'';
-                document.getElementById('contactPhone').value=settings.phone||'';
-                document.getElementById('contactEmail').value=settings.email||'';
-                document.getElementById('contactAddress').value=settings.address||'';
-                const logoPrev=document.getElementById('logoPreviewLarge'); const sidebarIcon=document.getElementById('sidebarIconPreview');
-                if(settings.logoBase64){ logoPrev.innerHTML=`<img src="${settings.logoBase64}" style="width:100%;height:100%;object-fit:cover;">`; sidebarIcon.innerHTML=`<img src="${settings.logoBase64}" style="width:100%;height:100%;object-fit:cover;">`; }
-                else { logoPrev.innerHTML='<i class="fas fa-store"></i>'; sidebarIcon.innerHTML='<i class="fas fa-store"></i>'; }
-                if(settings.darkMode) document.body.classList.add('dark'); else document.body.classList.remove('dark');
+        // ---------- DEMO DATA ----------
+        function ensureDemoData() {
+            if (products.length === 0) {
+                products.push({ id: 'p1', name: 'Café Americano', price: 2.5, cost: 0.8, stock: 45, category: 'Bebidas', barcode: '123456' });
+                products.push({ id: 'p2', name: 'Empanada de carne', price: 1.8, cost: 0.6, stock: 30, category: 'Comida', barcode: '789012' });
+                products.push({ id: 'p3', name: 'Jugo Natural', price: 3.2, cost: 1.2, stock: 20, category: 'Bebidas', barcode: '345678' });
             }
+            if (expenses.length === 0) {
+                expenses.push({ id: Date.now(), description: 'Compra insumos', amount: 45, category: 'Insumos', date: new Date().toISOString() });
+            }
+            saveAll();
+        }
 
-            // Generar mensaje predeterminado con todos los datos del negocio
-            function generateDefaultMessage() {
-                let msg = `¡Hola! 👋\n\nTe invitamos a conocer ${settings.businessName || "nuestro negocio"}.`;
-                if (settings.address) msg += `\n📍 Dirección: ${settings.address}`;
-                if (settings.phone) msg += `\n📞 Teléfono: ${settings.phone}`;
-                if (settings.email) msg += `\n✉️ Email: ${settings.email}`;
-                if (settings.whatsapp) msg += `\n📱 WhatsApp: ${settings.whatsapp}`;
-                msg += `\n\n🛍️ Consulta nuestros productos, promociones y servicios. ¡Estamos para servirte!`;
-                return msg;
+        // ---------- UI APLICACIÓN ----------
+        function applyUI() {
+            document.getElementById('businessNameDisplay').innerText = settings.businessName;
+            document.getElementById('settingsBusinessName').value = settings.businessName;
+            document.getElementById('settingsCurrency').value = settings.currency;
+            document.getElementById('darkModeToggle').checked = settings.darkMode;
+            document.getElementById('socialFacebook').value = settings.facebook || '';
+            document.getElementById('socialInstagram').value = settings.instagram || '';
+            document.getElementById('socialWhatsapp').value = settings.whatsapp || '';
+            document.getElementById('contactPhone').value = settings.phone || '';
+            document.getElementById('contactEmail').value = settings.email || '';
+            document.getElementById('contactAddress').value = settings.address || '';
+            const logoPrev = document.getElementById('logoPreviewLarge');
+            const sideIcon = document.getElementById('sidebarIconPreview');
+            if (settings.logoBase64) {
+                logoPrev.innerHTML = `<img src="${settings.logoBase64}" style="width:100%;height:100%;object-fit:cover;">`;
+                sideIcon.innerHTML = `<img src="${settings.logoBase64}" style="width:100%;height:100%;object-fit:cover;">`;
+            } else {
+                logoPrev.innerHTML = '<i class="fas fa-store"></i>';
+                sideIcon.innerHTML = '<i class="fas fa-store"></i>';
             }
+            if (settings.darkMode) document.body.classList.add('dark'); else document.body.classList.remove('dark');
+        }
+        function generateDefaultMessage() {
+            let msg = `¡Hola! 👋\nTe invitamos a conocer ${settings.businessName}.`;
+            if (settings.address) msg += `\n📍 Dirección: ${settings.address}`;
+            if (settings.phone) msg += `\n📞 Teléfono: ${settings.phone}`;
+            if (settings.email) msg += `\n✉️ Email: ${settings.email}`;
+            if (settings.whatsapp) msg += `\n📱 WhatsApp: ${settings.whatsapp}`;
+            msg += `\n\n🛍️ Consulta nuestros productos y promociones.`;
+            return msg;
+        }
+        function updateSupportUI() {
+            const textarea = document.getElementById('defaultWhatsAppMessage');
+            if (textarea && !textarea.dataset.userEdited) textarea.value = generateDefaultMessage();
+            const phone = settings.whatsapp || settings.phone || '';
+            let cleanPhone = phone.replace(/\s+/g, '').replace(/[^0-9+]/g, '');
+            if (cleanPhone && !cleanPhone.startsWith('+')) cleanPhone = '+' + cleanPhone;
+            const msg = document.getElementById('defaultWhatsAppMessage')?.value || generateDefaultMessage();
+            const encoded = encodeURIComponent(msg);
+            document.getElementById('whatsappLink').href = `https://wa.me/${cleanPhone || ''}?text=${encoded}`;
+        }
+        function buildBusinessCardHTML() {
+            const logoHtml = settings.logoBase64 ? `<img src="${settings.logoBase64}" style="width:50px;height:50px;border-radius:20px;">` : '<i class="fas fa-store" style="font-size:32px;"></i>';
+            let socials = '';
+            if (settings.facebook) socials += `<a href="${settings.facebook}" target="_blank" style="background:rgba(255,255,255,0.2); padding:6px 12px; border-radius:40px; margin:4px; display:inline-block;"><i class="fab fa-facebook-f"></i> FB</a> `;
+            if (settings.instagram) socials += `<a href="${settings.instagram}" target="_blank" style="background:rgba(255,255,255,0.2); padding:6px 12px; border-radius:40px; margin:4px;"><i class="fab fa-instagram"></i> IG</a> `;
+            if (settings.whatsapp) socials += `<a href="https://wa.me/${settings.whatsapp.replace(/[^0-9+]/g, '')}" target="_blank" style="background:rgba(255,255,255,0.2); padding:6px 12px; border-radius:40px; margin:4px;"><i class="fab fa-whatsapp"></i> WhatsApp</a> `;
+            let contacts = '';
+            if (settings.phone) contacts += `<p><i class="fas fa-phone-alt"></i> ${settings.phone}</p>`;
+            if (settings.email) contacts += `<p><i class="fas fa-envelope"></i> ${settings.email}</p>`;
+            if (settings.address) contacts += `<p><i class="fas fa-map-marker-alt"></i> ${settings.address}</p>`;
+            return `<div class="business-card-inner"><div style="display:flex; gap:16px; align-items:center; margin-bottom:16px;"><div style="width:60px; height:60px; background:white; border-radius:24px; display:flex; align-items:center; justify-content:center;">${logoHtml}</div><div><h2 style="margin:0;">${settings.businessName}</h2><p>${settings.currency} · Negocio</p></div></div>${contacts}${socials ? `<div style="margin-top:12px;">${socials}</div>` : '<p><em>Agrega redes sociales</em></p>'}</div>`;
+        }
+        function updateBusinessCard() { document.getElementById('businessCardBeauty').innerHTML = buildBusinessCardHTML(); }
 
-            function updateDefaultMessage() {
-                const textarea = document.getElementById('defaultWhatsAppMessage');
-                if (textarea && !textarea.dataset.userEdited) {
-                    textarea.value = generateDefaultMessage();
-                }
+        // ---------- CARRITO ----------
+        function renderCart() {
+            const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+            document.getElementById('cartTotal').innerText = settings.currency + total.toFixed(2);
+            const count = cart.reduce((s, i) => s + i.quantity, 0);
+            const badge = document.getElementById('cartCountBadge');
+            badge.style.display = count ? 'inline' : 'none';
+            badge.innerText = count;
+            const container = document.getElementById('cartItems');
+            if (!cart.length) container.innerHTML = '<div style="text-align:center;padding:30px;"><i class="fas fa-shopping-cart"></i> Vacío</div>';
+            else {
+                container.innerHTML = cart.map((item, idx) => `<div class="cart-item"><span style="flex:1;">${item.name}</span><span>${settings.currency}${item.price.toFixed(2)}</span><input type="number" value="${item.quantity}" min="1" style="width:60px;" onchange="updateCartQty(${idx}, this.value)"><button class="btn-sm" style="background:#ef4444; color:white; border:none; border-radius:30px; padding:6px 12px;" onclick="removeFromCart(${idx})"><i class="fas fa-trash"></i></button></div>`).join('');
             }
+        }
+        window.updateCartQty = (idx, val) => { cart[idx].quantity = Math.max(1, parseInt(val) || 1); renderCart(); renderPOS(); };
+        window.removeFromCart = (idx) => { cart.splice(idx, 1); renderCart(); renderPOS(); };
+        window.addToCart = async (id) => {
+            const prod = products.find(p => p.id === id);
+            if (!prod || prod.stock <= 0) { await showAlert('Producto sin stock'); return; }
+            const existing = cart.find(i => i.productId === id);
+            if (existing) { if (existing.quantity >= prod.stock) { await showAlert('Stock máximo alcanzado'); return; } existing.quantity++; }
+            else cart.push({ productId: id, name: prod.name, price: prod.price, cost: prod.cost || 0, quantity: 1 });
+            renderCart(); renderPOS();
+        };
+        async function processSale() {
+            if (!cart.length) return;
+            const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+            if (!await showConfirm(`Total: ${settings.currency}${total.toFixed(2)}`, 'Confirmar venta')) return;
+            cart.forEach(item => {
+                const prod = products.find(p => p.id === item.productId);
+                if (prod) prod.stock -= item.quantity;
+            });
+            sales.unshift({ id: Date.now().toString(), items: cart.map(i => ({ ...i })), total, date: new Date().toISOString() });
+            saveAll();
+            cart = [];
+            renderCart();
+            renderAll();
+            await showAlert('Venta registrada correctamente', 'Éxito');
+        }
 
-            function updateSupportLink() {
-                const phone = settings.whatsapp || settings.phone || '';
-                let cleanPhone = phone.replace(/\s+/g, '').replace(/[^0-9+]/g, '');
-                if (cleanPhone && !cleanPhone.startsWith('+')) cleanPhone = '+' + cleanPhone;
-                const msg = document.getElementById('defaultWhatsAppMessage')?.value || generateDefaultMessage();
-                const encodedMsg = encodeURIComponent(msg);
-                document.getElementById('whatsappLink').href = `https://wa.me/${cleanPhone || ''}?text=${encodedMsg}`;
-            }
+        // ---------- RENDERIZADOS PRINCIPALES ----------
+        function renderPOS() {
+            const search = (document.getElementById('posSearch')?.value || '').toLowerCase();
+            const cat = document.getElementById('categoryFilter')?.value || '';
+            let filtered = products.filter(p => p.name.toLowerCase().includes(search) && (!cat || p.category === cat));
+            const grid = document.getElementById('posProductGrid');
+            grid.innerHTML = filtered.map(p => `<div class="pos-product-card" onclick="addToCart('${p.id}')"><strong>${p.name}</strong><br><span>${settings.currency}${p.price.toFixed(2)}</span><br><small>Stock: ${p.stock}</small></div>`).join('');
+            const cats = [...new Set(products.map(p => p.category).filter(Boolean))];
+            const sel = document.getElementById('categoryFilter');
+            sel.innerHTML = '<option value="">Todas</option>' + cats.map(c => `<option>${c}</option>`).join('');
+            sel.value = cat;
+        }
+        function renderProductsTable() {
+            const tbody = document.getElementById('productsTableBody');
+            tbody.innerHTML = products.map(p => `<tr><td>${p.name}</td><td>${settings.currency}${p.price.toFixed(2)}</td><td>${settings.currency}${(p.cost || 0).toFixed(2)}</td><td>${p.stock}</td><td>${p.category || '-'}</td><td><button class="btn-sm btn-outline" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i></button> <button class="btn-sm btn-danger" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+        }
+        window.editProduct = (id) => {
+            const p = products.find(x => x.id === id);
+            if (p) { editingProductId = id; document.getElementById('prodName').value = p.name; document.getElementById('prodPrice').value = p.price; document.getElementById('prodCost').value = p.cost || ''; document.getElementById('prodStock').value = p.stock; document.getElementById('prodCategory').value = p.category || ''; document.getElementById('prodBarcode').value = p.barcode || ''; document.getElementById('modalProduct').style.display = 'flex'; }
+        };
+        window.deleteProduct = async (id) => { if (await showConfirm('¿Eliminar producto?')) { products = products.filter(p => p.id !== id); saveAll(); renderAll(); } };
+        async function saveProductHandler() {
+            const name = document.getElementById('prodName').value.trim();
+            const price = parseFloat(document.getElementById('prodPrice').value);
+            const stock = parseInt(document.getElementById('prodStock').value);
+            if (!name || isNaN(price) || isNaN(stock)) { await showAlert('Datos inválidos'); return; }
+            const cost = parseFloat(document.getElementById('prodCost').value) || 0;
+            const category = document.getElementById('prodCategory').value.trim();
+            const barcode = document.getElementById('prodBarcode').value.trim();
+            if (editingProductId) { const p = products.find(x => x.id === editingProductId); if (p) Object.assign(p, { name, price, cost, stock, category, barcode }); }
+            else products.push({ id: Date.now().toString(36), name, price, cost, stock, category, barcode });
+            saveAll(); closeModal('modalProduct'); editingProductId = null; renderAll();
+        }
+        function renderExpenses() {
+            const tbody = document.getElementById('expensesTableBody');
+            tbody.innerHTML = expenses.map((e, idx) => `<tr><td>${new Date(e.date).toLocaleDateString()}</td><td>${e.description}</td><td>${e.category}</td><td>${settings.currency}${e.amount.toFixed(2)}</td><td><button class="btn-sm btn-danger" onclick="deleteExpense(${idx})"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+        }
+        window.deleteExpense = async (idx) => { if (await showConfirm('Eliminar gasto?')) { expenses.splice(idx, 1); saveAll(); renderExpenses(); renderExpenseStats(); renderExpenseBars(); } };
+        function renderExpenseStats() {
+            const totalExp = expenses.reduce((s, e) => s + e.amount, 0);
+            const totalSales = sales.reduce((s, e) => s + e.total, 0);
+            document.getElementById('expenseStats').innerHTML = `<div class="stat-card"><strong>${settings.currency}${totalExp.toFixed(2)}</strong><br>Gastos Totales</div><div class="stat-card"><strong>${settings.currency}${totalSales.toFixed(2)}</strong><br>Ventas Totales</div>`;
+        }
+        function renderExpenseBars() {
+            const map = {};
+            expenses.forEach(e => map[e.category] = (map[e.category] || 0) + e.amount);
+            const total = Object.values(map).reduce((a, b) => a + b, 0);
+            document.getElementById('expenseBars').innerHTML = Object.entries(map).map(([cat, amt]) => `<div><strong>${cat}</strong> ${total ? ((amt / total * 100).toFixed(1)) : 0}% <progress value="${total ? (amt / total * 100) : 0}" max="100"></progress></div>`).join('') || 'Sin gastos';
+        }
+        async function saveExpenseHandler() {
+            const desc = document.getElementById('expDesc').value.trim();
+            const amt = parseFloat(document.getElementById('expAmount').value);
+            if (!desc || isNaN(amt) || amt <= 0) { await showAlert('Datos inválidos'); return; }
+            const cat = document.getElementById('expCategory').value;
+            expenses.unshift({ id: Date.now(), description: desc, amount: amt, category: cat, date: new Date().toISOString() });
+            saveAll(); closeModal('modalExpense'); renderExpenses(); renderExpenseStats(); renderExpenseBars();
+        }
+        function renderDashboard() {
+            const today = new Date().toISOString().slice(0, 10);
+            const todaySales = sales.filter(s => s.date.startsWith(today));
+            const total = todaySales.reduce((s, x) => s + x.total, 0);
+            const cost = todaySales.reduce((s, x) => s + x.items.reduce((c, i) => c + ((i.cost || 0) * i.quantity), 0), 0);
+            const expToday = expenses.filter(e => e.date.startsWith(today)).reduce((s, e) => s + e.amount, 0);
+            const profit = total - cost - expToday;
+            document.getElementById('dashboardStats').innerHTML = `<div class="stat-card"><strong>${settings.currency}${total.toFixed(2)}</strong><br>Ventas Hoy</div><div class="stat-card"><strong>${settings.currency}${profit.toFixed(2)}</strong><br>Ganancia Neta</div>`;
+            document.getElementById('todaySalesTable').innerHTML = todaySales.length ? todaySales.map(s => `<p><i class="fas fa-receipt"></i> ${new Date(s.date).toLocaleTimeString()} - ${s.items.length} items - ${settings.currency}${s.total.toFixed(2)}</p>`).join('') : '<p>Sin ventas hoy</p>';
+        }
+        function renderHistory() {
+            const tbody = document.getElementById('historyTableBody');
+            tbody.innerHTML = sales.map(s => `<tr><td>${new Date(s.date).toLocaleString()}</td><td>${s.items.length}</td><td>${settings.currency}${s.total.toFixed(2)}</td></tr>`).join('') || '<tr><td colspan="3">Sin ventas</td></tr>';
+        }
+        function populateQR() {
+            const sel = document.getElementById('qrProductSelect');
+            sel.innerHTML = '<option value="">-- Elegir --</option>' + products.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+        }
+        function renderAll() { renderPOS(); renderProductsTable(); renderExpenses(); renderExpenseStats(); renderExpenseBars(); renderDashboard(); renderHistory(); populateQR(); updateBusinessCard(); }
 
-            function persistAll(){ save(STORAGE.products,products); save(STORAGE.sales,sales); save(STORAGE.expenses,expenses); save(STORAGE.settings,settings); updateBusinessPreview(); applyUI(); updateDefaultMessage(); updateSupportLink(); }
-            
-            function buildCardHTML(){ 
-                let logoHtml = settings.logoBase64 ? `<img src="${settings.logoBase64}" style="width:50px; height:50px; border-radius:20px;">` : '<i class="fas fa-store" style="font-size:32px;"></i>';
-                let socials = ''; if(settings.facebook) socials+=`<a href="${settings.facebook}" target="_blank" style="background:rgba(255,255,255,0.2); padding:6px 12px; border-radius:40px;"><i class="fab fa-facebook-f"></i> FB</a> `;
-                if(settings.instagram) socials+=`<a href="${settings.instagram}" target="_blank" style="background:rgba(255,255,255,0.2); padding:6px 12px; border-radius:40px;"><i class="fab fa-instagram"></i> IG</a> `;
-                if(settings.whatsapp) socials+=`<a href="https://wa.me/${settings.whatsapp.replace(/[^0-9+]/g,'')}" target="_blank" style="background:rgba(255,255,255,0.2); padding:6px 12px; border-radius:40px;"><i class="fab fa-whatsapp"></i> WhatsApp</a> `;
-                let contacts = ''; if(settings.phone) contacts+=`<p><i class="fas fa-phone-alt"></i> ${settings.phone}</p>`;
-                if(settings.email) contacts+=`<p><i class="fas fa-envelope"></i> ${settings.email}</p>`;
-                if(settings.address) contacts+=`<p><i class="fas fa-map-marker-alt"></i> ${settings.address}</p>`;
-                return `<div class="business-card-inner"><div style="display:flex; gap:16px; align-items:center; margin-bottom:16px;"><div style="width:60px; height:60px; background:white; border-radius:24px; display:flex; align-items:center; justify-content:center;">${logoHtml}</div><div><h2 style="margin:0;">${settings.businessName}</h2><p>${settings.currency} · Negocio</p></div></div>${contacts}${socials?`<div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;">${socials}</div>`:'<p><em>Agrega redes sociales</em></p>'}</div>`;
-            }
-            function updateBusinessPreview(){ let cont = document.getElementById('businessCardBeauty'); if(cont) cont.innerHTML = buildCardHTML(); }
+        // ---------- TUTORIAL Y AYUDA ----------
+        let tutorialActive = false, currentStep = 0;
+        const steps = [
+            { panel: 'pos', title: '✨ Bienvenido a tu POS', desc: 'Haz clic en cualquier producto para agregarlo al carrito.', highlightId: 'posProductGrid' },
+            { panel: 'products', title: '📦 Inventario', desc: 'Agrega, edita o elimina productos. Controla stock y precios.', highlightId: 'btnAddProduct' },
+            { panel: 'expenses', title: '💰 Gastos', desc: 'Registra tus gastos para calcular ganancias reales.', highlightId: 'btnAddExpense' },
+            { panel: 'dashboard', title: '📊 Dashboard', desc: 'Visualiza ventas de hoy y ganancia neta.', highlightId: 'dashboardStats' },
+            { panel: 'settings', title: '⚙️ Configuración', desc: 'Personaliza negocio, moneda, logo y modo oscuro.', highlightId: 'settingsBusinessName' }
+        ];
+        function removeHighlight() { document.querySelectorAll('.highlight-element').forEach(el => el.classList.remove('highlight-element')); }
+        function runTutorialStep() {
+            if (!tutorialActive || currentStep >= steps.length) { tutorialActive = false; removeHighlight(); showAlert('¡Tutorial finalizado! Explora todas las funciones.', '🎉 Éxito'); return; }
+            const step = steps[currentStep];
+            navigateTo(step.panel);
+            setTimeout(() => {
+                const el = step.highlightId ? document.getElementById(step.highlightId) : null;
+                removeHighlight();
+                if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('highlight-element'); }
+                const modalDiv = document.createElement('div'); modalDiv.className = 'tutorial-overlay'; modalDiv.id = 'tutDialog';
+                modalDiv.innerHTML = `<div class="tutorial-card"><h3>${step.title}</h3><p>${step.desc}</p><div class="tutorial-actions" style="margin-top:24px; display:flex; gap:12px; justify-content:center;"><button class="btn btn-outline" id="tutSkip">Saltar</button><button class="btn btn-accent" id="tutNext">Siguiente (${currentStep+1}/${steps.length})</button></div></div>`;
+                document.body.appendChild(modalDiv);
+                document.getElementById('tutNext').onclick = () => { modalDiv.remove(); currentStep++; runTutorialStep(); };
+                document.getElementById('tutSkip').onclick = () => { modalDiv.remove(); tutorialActive = false; removeHighlight(); };
+            }, 200);
+        }
+        function startTutorial() { if (tutorialActive) return; tutorialActive = true; currentStep = 0; runTutorialStep(); }
 
-            // Funciones de carrito, productos, gastos (igual que antes)
-            window.addToCart = async (id)=>{ let p=products.find(x=>x.id===id); if(!p || p.stock<=0){ await showAlert('Sin stock'); return; } let ex=cart.find(i=>i.productId===id); if(ex){ if(ex.quantity>=p.stock){ await showAlert('Stock máximo'); return; } ex.quantity++; } else cart.push({ productId:id, name:p.name, price:p.price, cost:p.cost||0, quantity:1 }); renderCart(); renderPOS(); };
-            function renderCart(){ let total=cart.reduce((s,i)=>s+i.price*i.quantity,0); document.getElementById('cartTotal').innerText=settings.currency+total.toFixed(2); let count=cart.reduce((s,i)=>s+i.quantity,0); let badge=document.getElementById('cartCountBadge'); badge.style.display=count?'inline':'none'; badge.innerText=count; let div=document.getElementById('cartItems'); if(!cart.length) div.innerHTML='<div style="text-align:center;padding:30px;"><i class="fas fa-shopping-cart"></i> Vacío</div>'; else div.innerHTML=cart.map((item,idx)=>`<div class="cart-item"><span style="flex:1;">${item.name}</span><span>${settings.currency}${item.price.toFixed(2)}</span><input type="number" value="${item.quantity}" min="1" style="width:60px;" onchange="updateCartQty(${idx}, this.value)"><button class="btn-sm" style="background:#ef4444; color:white; border:none; border-radius:30px; padding:6px 12px;" onclick="removeFromCart(${idx})"><i class="fas fa-trash"></i></button></div>`).join(''); }
-            window.updateCartQty=(idx,val)=>{ cart[idx].quantity=Math.max(1,parseInt(val)||1); renderCart(); renderPOS(); };
-            window.removeFromCart=(idx)=>{ cart.splice(idx,1); renderCart(); renderPOS(); };
-            async function processSale(){ if(!cart.length) return; let total=cart.reduce((s,i)=>s+i.price*i.quantity,0); if(!await showConfirm(`Total: ${settings.currency}${total.toFixed(2)}`,'Cobrar')) return; cart.forEach(i=>{ let p=products.find(x=>x.id===i.productId); if(p) p.stock-=i.quantity; }); sales.unshift({ id:Date.now().toString(36), items:cart.map(i=>({...i})), total, date:new Date().toISOString() }); persistAll(); cart=[]; renderCart(); renderAll(); await showAlert(`Venta registrada por ${settings.currency}${total.toFixed(2)}`); }
-            function renderPOS(){ let search=(document.getElementById('posSearch')?.value||'').toLowerCase(); let cat=document.getElementById('categoryFilter')?.value||''; let filtered=products.filter(p=>p.name.toLowerCase().includes(search)&&(!cat||p.category===cat)); document.getElementById('posProductGrid').innerHTML=filtered.map(p=>`<div class="pos-product-card" onclick="addToCart('${p.id}')"><strong>${p.name}</strong><span>${settings.currency}${p.price.toFixed(2)}</span><small>Stock: ${p.stock}</small></div>`).join(''); let cats=[...new Set(products.map(p=>p.category).filter(Boolean))]; let sel=document.getElementById('categoryFilter'); sel.innerHTML='<option value="">Todas</option>'+cats.map(c=>`<option>${c}</option>`).join(''); sel.value=cat; }
-            function renderProductsTable(){ document.getElementById('productsTableBody').innerHTML=products.map(p=>`<tr><td>${p.name}</td><td>${settings.currency}${p.price.toFixed(2)}</td><td>${settings.currency}${(p.cost||0).toFixed(2)}</td><td>${p.stock}</td><td>${p.category||'-'}</td><td><button class="btn-sm btn-outline" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i></button> <button class="btn-sm btn-danger" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button></td></tr>`).join(''); }
-            window.editProduct=(id)=>{ let p=products.find(x=>x.id===id); if(p){ editingProductId=id; document.getElementById('prodName').value=p.name; document.getElementById('prodPrice').value=p.price; document.getElementById('prodCost').value=p.cost||''; document.getElementById('prodStock').value=p.stock; document.getElementById('prodCategory').value=p.category||''; document.getElementById('prodBarcode').value=p.barcode||''; document.getElementById('modalProduct').style.display='flex'; } };
-            window.deleteProduct=async(id)=>{ if(await showConfirm('Eliminar producto?')){ products=products.filter(p=>p.id!==id); persistAll(); renderAll(); } };
-            async function saveProductHandler(){ let name=document.getElementById('prodName').value.trim(); let price=parseFloat(document.getElementById('prodPrice').value); let stock=parseInt(document.getElementById('prodStock').value); if(!name||isNaN(price)||isNaN(stock)){ await showAlert('Datos inválidos'); return; } let cost=parseFloat(document.getElementById('prodCost').value)||0; let category=document.getElementById('prodCategory').value.trim(); let barcode=document.getElementById('prodBarcode').value.trim(); if(editingProductId){ let p=products.find(x=>x.id===editingProductId); if(p) Object.assign(p,{name,price,cost,stock,category,barcode}); } else products.push({ id:Date.now().toString(36), name, price, cost, stock, category, barcode }); persistAll(); closeModal('modalProduct'); editingProductId=null; renderAll(); }
-            function renderExpenses(){ document.getElementById('expensesTableBody').innerHTML=expenses.map((e,idx)=>`<tr><td>${new Date(e.date).toLocaleDateString()}</td><td>${e.description}</td><td>${e.category}</td><td>${settings.currency}${e.amount.toFixed(2)}</td><td><button class="btn-sm btn-danger" onclick="deleteExpense(${idx})"><i class="fas fa-trash"></i></button></td></tr>`).join(''); }
-            window.deleteExpense = async (idx)=>{ if(await showConfirm('¿Eliminar este gasto?')){ expenses.splice(idx,1); persistAll(); renderExpenses(); renderExpenseStats(); renderExpenseBars(); } };
-            function renderExpenseStats(){ let totalExp=expenses.reduce((s,e)=>s+e.amount,0); let totalSales=sales.reduce((s,e)=>s+e.total,0); document.getElementById('expenseStats').innerHTML=`<div class="stat-card"><strong>${settings.currency}${totalExp.toFixed(2)}</strong><br>Gastos Totales</div><div class="stat-card"><strong>${settings.currency}${totalSales.toFixed(2)}</strong><br>Ventas Totales</div>`; }
-            function renderExpenseBars(){ let map={}; expenses.forEach(e=>map[e.category]=(map[e.category]||0)+e.amount); let total=Object.values(map).reduce((a,b)=>a+b,0); document.getElementById('expenseBars').innerHTML=Object.entries(map).map(([cat,amt])=>`<div><strong>${cat}</strong> ${total?((amt/total*100).toFixed(1)):0}% <progress value="${total?(amt/total*100):0}" max="100"></progress></div>`).join('')||'Sin gastos'; }
-            async function saveExpenseHandler(){ let desc=document.getElementById('expDesc').value.trim(); let amt=parseFloat(document.getElementById('expAmount').value); if(!desc||isNaN(amt)||amt<=0){ await showAlert('Datos inválidos'); return; } let cat=document.getElementById('expCategory').value; expenses.unshift({ id:Date.now(), description:desc, amount:amt, category:cat, date:new Date().toISOString() }); persistAll(); closeModal('modalExpense'); renderExpenses(); renderExpenseStats(); renderExpenseBars(); }
-            function renderDashboard(){ let today=new Date().toISOString().slice(0,10); let todaySales=sales.filter(s=>s.date.startsWith(today)); let total=todaySales.reduce((s,x)=>s+x.total,0); let cost=todaySales.reduce((s,x)=>s+x.items.reduce((c,i)=>c+((i.cost||0)*i.quantity),0),0); let exp=expenses.filter(e=>e.date.startsWith(today)).reduce((s,e)=>s+e.amount,0); let profit=total-cost-exp; document.getElementById('dashboardStats').innerHTML=`<div class="stat-card"><strong>${settings.currency}${total.toFixed(2)}</strong><br>Ventas Hoy</div><div class="stat-card"><strong>${settings.currency}${profit.toFixed(2)}</strong><br>Ganancia Neta</div>`; document.getElementById('todaySalesTable').innerHTML=todaySales.length?todaySales.map(s=>`<p><i class="fas fa-receipt"></i> ${new Date(s.date).toLocaleTimeString()} - ${s.items.length} items - ${settings.currency}${s.total.toFixed(2)}</p>`).join(''):'<p>Sin ventas hoy</p>'; }
-            function renderHistory(){ document.getElementById('historyTableBody').innerHTML=sales.map(s=>`<tr><td>${new Date(s.date).toLocaleString()}</td><td>${s.items.length}</td><td>${settings.currency}${s.total.toFixed(2)}</td></tr>`).join('')||'<tr><td colspan="3">Sin ventas</td></tr>'; }
-            function populateQRSelect(){ let sel=document.getElementById('qrProductSelect'); sel.innerHTML='<option value="">-- Elegir --</option>'+products.map(p=>`<option value="${p.id}">${p.name}</option>`).join(''); }
-            async function saveBusinessInfoAndShowCard(){
-                settings.facebook=document.getElementById('socialFacebook').value; settings.instagram=document.getElementById('socialInstagram').value; settings.whatsapp=document.getElementById('socialWhatsapp').value;
-                settings.phone=document.getElementById('contactPhone').value; settings.email=document.getElementById('contactEmail').value; settings.address=document.getElementById('contactAddress').value;
-                persistAll(); await showAlert('Datos guardados'); const modal=document.getElementById('cardModal'); document.getElementById('dynamicCardPreview').innerHTML=buildCardHTML(); modal.style.display='flex';
-                document.getElementById('modalDownloadBtn').onclick = () => { html2canvas(document.getElementById('dynamicCardPreview'),{scale:2}).then(c=>{ let a=document.createElement('a'); a.download='tarjeta.png'; a.href=c.toDataURL(); a.click(); }); };
-                document.getElementById('closeModalBtn').onclick = () => modal.style.display='none';
-                updateDefaultMessage(); updateSupportLink();
-            }
-            function renderAll(){ renderPOS(); renderProductsTable(); renderExpenses(); renderExpenseStats(); renderExpenseBars(); renderDashboard(); renderHistory(); populateQRSelect(); updateBusinessPreview(); }
-            
-            function initEvents(){
-                document.getElementById('posSearch').addEventListener('input',()=>renderPOS()); document.getElementById('categoryFilter').addEventListener('change',()=>renderPOS());
-                document.getElementById('barcodeInput').addEventListener('keypress',async(e)=>{ if(e.key==='Enter'){ let code=e.target.value.trim(); let prod=products.find(p=>p.barcode===code); if(prod){ addToCart(prod.id); e.target.value=''; } else await showAlert('Código no existe'); } });
-                document.getElementById('btnCheckout').onclick=processSale; document.getElementById('btnClearHistory').onclick=async()=>{ if(await showConfirm('Limpiar historial?')){ sales=[]; persistAll(); renderAll(); } };
-                document.getElementById('btnAddProduct').onclick=()=>{ editingProductId=null; document.getElementById('prodName').value=''; document.getElementById('prodPrice').value=''; document.getElementById('prodCost').value=''; document.getElementById('prodStock').value=''; document.getElementById('prodCategory').value=''; document.getElementById('prodBarcode').value=''; document.getElementById('modalProduct').style.display='flex'; };
-                document.getElementById('saveProductBtn').onclick=saveProductHandler; document.getElementById('btnAddExpense').onclick=()=>{ document.getElementById('expDesc').value=''; document.getElementById('expAmount').value=''; document.getElementById('modalExpense').style.display='flex'; };
-                document.getElementById('saveExpenseBtn').onclick=saveExpenseHandler;
-                document.getElementById('btnExportData').onclick=()=>{ let data={products,sales,expenses,settings}; let a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'})); a.download='negocio_backup.json'; a.click(); };
-                document.getElementById('btnImportData').onclick=()=>document.getElementById('importFileInput').click();
-                document.getElementById('importFileInput').onchange=async(e)=>{ let file=e.target.files[0]; if(!file) return; let reader=new FileReader(); reader.onload=async(ev)=>{ try{ let data=JSON.parse(ev.target.result); products=data.products||[]; sales=data.sales||[]; expenses=data.expenses||[]; settings={...settings,...data.settings}; persistAll(); location.reload(); } catch{ await showAlert('Archivo inválido'); } }; reader.readAsText(file); };
-                document.getElementById('btnResetData').onclick=async()=>{ if(await showConfirm('Borrar todo irreversible')){ localStorage.clear(); location.reload(); } };
-                document.getElementById('settingsBusinessName').oninput=function(){ settings.businessName=this.value; document.getElementById('businessNameDisplay').innerText=this.value; persistAll(); };
-                document.getElementById('settingsCurrency').oninput=function(){ settings.currency=this.value||'$'; persistAll(); renderAll(); };
-                document.getElementById('darkModeToggle').onchange=function(){ settings.darkMode=this.checked; document.body.classList.toggle('dark',this.checked); persistAll(); };
-                document.getElementById('businessLogoUpload').onchange=e=>{ let file=e.target.files[0]; if(file){ let reader=new FileReader(); reader.onload=ev=>{ settings.logoBase64=ev.target.result; persistAll(); applyUI(); updateBusinessPreview(); }; reader.readAsDataURL(file); } };
-                document.getElementById('saveBusinessInfoBtn').onclick=saveBusinessInfoAndShowCard;
-                document.getElementById('shareCardBtn').onclick=()=>{ let text=`📇 ${settings.businessName}\n📞 ${settings.phone||''}\n✉️ ${settings.email||''}\n🌐 ${settings.facebook||''} ${settings.instagram||''}`; if(navigator.share) navigator.share({title:'Mi tarjeta', text}); else showAlert(text); };
-                document.getElementById('downloadCardImageBtn').onclick=()=>{ let el=document.querySelector('#businessCardBeauty'); if(el) html2canvas(el,{scale:2}).then(c=>{ let a=document.createElement('a'); a.download='tarjeta.png'; a.href=c.toDataURL(); a.click(); }); };
-                document.getElementById('qrProductSelect').onchange=function(){ let id=this.value; let container=document.getElementById('qrContainer'); if(!id){ container.style.display='none'; return; } container.style.display='block'; document.getElementById('qrCanvas').innerHTML=''; let p=products.find(x=>x.id===id); if(p) new QRCode(document.getElementById('qrCanvas'),{ text:`${p.name} - ${settings.currency}${p.price}`, width:150, height:150 }); };
-                document.getElementById('btnDownloadQr').onclick=()=>{ let canvas=document.querySelector('#qrCanvas canvas'); if(canvas){ let a=document.createElement('a'); a.download='qr.png'; a.href=canvas.toDataURL(); a.click(); } };
-                // Mensaje de atención
-                const msgTextarea = document.getElementById('defaultWhatsAppMessage');
-                msgTextarea.addEventListener('input', () => { msgTextarea.dataset.userEdited = 'true'; updateSupportLink(); });
-                document.getElementById('copyMessageBtn').onclick = () => { navigator.clipboard.writeText(msgTextarea.value); showAlert('Mensaje copiado al portapapeles'); };
-                document.getElementById('sendWithMessageBtn').onclick = () => { updateSupportLink(); const link = document.getElementById('whatsappLink').href; if(link && link.includes('wa.me')) window.open(link, '_blank'); else showAlert('Configura un número de WhatsApp en Configuración'); };
-            }
-            function closeSidebarMobile(){ if(window.innerWidth<=900) document.getElementById('sidebar').classList.remove('open'); }
-            function navigateTo(panel){
-                document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-                document.getElementById(`panel-${panel}`).classList.add('active');
-                document.querySelectorAll('.sidebar-nav button').forEach(b=>b.classList.remove('active'));
-                document.querySelector(`.sidebar-nav button[data-panel="${panel}"]`)?.classList.add('active');
-                document.querySelectorAll('.mobile-nav-inner button').forEach(b=>b.classList.remove('active'));
-                document.querySelector(`.mobile-nav-inner button[data-panel="${panel}"]`)?.classList.add('active');
-                if(panel==='pos') renderPOS(); else if(panel==='dashboard') renderDashboard(); else if(panel==='products') renderProductsTable();
-                else if(panel==='expenses'){ renderExpenses(); renderExpenseStats(); renderExpenseBars(); }
-                else if(panel==='support'){ updateDefaultMessage(); updateSupportLink(); } else if(panel==='businesscard') updateBusinessPreview();
-                else if(panel==='qr') populateQRSelect(); else if(panel==='history') renderHistory();
-                document.getElementById('moreMenu').style.display='none'; closeSidebarMobile();
-            }
-            document.querySelectorAll('.sidebar-nav button, .mobile-nav-inner button[data-panel]').forEach(btn=>btn.addEventListener('click',()=>navigateTo(btn.dataset.panel)));
-            const moreBtn=document.getElementById('btnMoreMenu'); const moreMenu=document.getElementById('moreMenu');
-            function buildMoreMenu(){ moreMenu.innerHTML=''; ['dashboard','support','businesscard','qr','history','settings'].forEach(p=>{ let btn=document.createElement('button'); btn.innerHTML=`<i class="fas ${p==='dashboard'?'fa-chart-line':p==='support'?'fa-headset':p==='businesscard'?'fa-id-card':p==='qr'?'fa-qrcode':p==='history'?'fa-history':'fa-cog'}"></i> ${p==='dashboard'?'Dashboard':p==='support'?'Atención':p==='businesscard'?'Tarjeta':p==='qr'?'QR':p==='history'?'Historial':'Config'}`; btn.dataset.panel=p; btn.addEventListener('click',()=>{ navigateTo(p); moreMenu.style.display='none'; }); moreMenu.appendChild(btn); }); }
-            buildMoreMenu(); moreBtn.addEventListener('click',(e)=>{ e.stopPropagation(); moreMenu.style.display=moreMenu.style.display==='flex'?'none':'flex'; }); document.addEventListener('click',(e)=>{ if(!e.target.closest('#btnMoreMenu')&&!e.target.closest('#moreMenu')) moreMenu.style.display='none'; });
-            let startX; document.querySelector('.main')?.addEventListener('touchstart',(e)=>{ startX=e.touches[0].clientX; });
-            document.querySelector('.main')?.addEventListener('touchend',()=>{ if(startX && startX<40) document.getElementById('sidebar')?.classList.toggle('open'); else closeSidebarMobile(); });
-            document.getElementById('mainContent').addEventListener('click',()=>{ if(window.innerWidth<=900) closeSidebarMobile(); });
-            if(!isFirstTime) loadDataAndInit();
-        })();
-    </script>
+        // ---------- NAVEGACIÓN ----------
+        function navigateTo(panel) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(`panel-${panel}`).classList.add('active');
+            document.querySelectorAll('.sidebar-nav button, .mobile-nav-inner button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.sidebar-nav button[data-panel="${panel}"]`)?.classList.add('active');
+            document.querySelector(`.mobile-nav-inner button[data-panel="${panel}"]`)?.classList.add('active');
+            if (panel === 'pos') renderPOS(); else if (panel === 'dashboard') renderDashboard(); else if (panel === 'products') renderProductsTable(); else if (panel === 'expenses') { renderExpenses(); renderExpenseStats(); renderExpenseBars(); } else if (panel === 'support') updateSupportUI(); else if (panel === 'businesscard') updateBusinessCard(); else if (panel === 'qr') populateQR(); else if (panel === 'history') renderHistory();
+            if (window.innerWidth <= 900) document.getElementById('sidebar')?.classList.remove('open');
+        }
+
+        // ---------- EVENTOS DE CONFIGURACIÓN Y PERSISTENCIA ----------
+        async function saveBusinessInfoAndShowCard() {
+            settings.facebook = document.getElementById('socialFacebook').value;
+            settings.instagram = document.getElementById('socialInstagram').value;
+            settings.whatsapp = document.getElementById('socialWhatsapp').value;
+            settings.phone = document.getElementById('contactPhone').value;
+            settings.email = document.getElementById('contactEmail').value;
+            settings.address = document.getElementById('contactAddress').value;
+            saveAll(); await showAlert('Datos guardados'); updateSupportUI(); updateBusinessCard();
+            const modal = document.getElementById('cardModal'); document.getElementById('dynamicCardPreview').innerHTML = buildBusinessCardHTML(); modal.style.display = 'flex';
+            document.getElementById('modalDownloadBtn').onclick = () => { html2canvas(document.getElementById('dynamicCardPreview'), { scale: 2 }).then(c => { const a = document.createElement('a'); a.download = 'tarjeta.png'; a.href = c.toDataURL(); a.click(); }); };
+            document.getElementById('closeModalBtn').onclick = () => modal.style.display = 'none';
+        }
+
+        function initEvents() {
+            document.getElementById('posSearch').addEventListener('input', () => renderPOS());
+            document.getElementById('categoryFilter').addEventListener('change', () => renderPOS());
+            document.getElementById('barcodeInput').addEventListener('keypress', async (e) => { if (e.key === 'Enter') { const code = e.target.value.trim(); const prod = products.find(p => p.barcode === code); if (prod) { addToCart(prod.id); e.target.value = ''; } else await showAlert('Código no encontrado'); } });
+            document.getElementById('btnCheckout').onclick = processSale;
+            document.getElementById('btnClearHistory').onclick = async () => { if (await showConfirm('Limpiar historial de ventas?')) { sales = []; saveAll(); renderAll(); } };
+            document.getElementById('btnAddProduct').onclick = () => { editingProductId = null; document.getElementById('prodName').value = ''; document.getElementById('prodPrice').value = ''; document.getElementById('prodCost').value = ''; document.getElementById('prodStock').value = ''; document.getElementById('prodCategory').value = ''; document.getElementById('prodBarcode').value = ''; document.getElementById('modalProduct').style.display = 'flex'; };
+            document.getElementById('saveProductBtn').onclick = saveProductHandler;
+            document.getElementById('btnAddExpense').onclick = () => { document.getElementById('expDesc').value = ''; document.getElementById('expAmount').value = ''; document.getElementById('modalExpense').style.display = 'flex'; };
+            document.getElementById('saveExpenseBtn').onclick = saveExpenseHandler;
+            document.getElementById('btnExportData').onclick = () => { const data = { products, sales, expenses, settings }; const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(data)], { type: 'application/json' })); a.download = 'negocio_backup.json'; a.click(); };
+            document.getElementById('btnImportData').onclick = () => document.getElementById('importFileInput').click();
+            document.getElementById('importFileInput').onchange = async (e) => { const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = async (ev) => { try { const data = JSON.parse(ev.target.result); products = data.products || []; sales = data.sales || []; expenses = data.expenses || []; settings = { ...settings, ...data.settings }; saveAll(); location.reload(); } catch { await showAlert('Archivo inválido'); } }; reader.readAsText(file); };
+            document.getElementById('btnResetData').onclick = async () => { if (await showConfirm('Borrar TODOS los datos? irreversible')) { localStorage.clear(); location.reload(); } };
+            document.getElementById('settingsBusinessName').oninput = function () { settings.businessName = this.value; document.getElementById('businessNameDisplay').innerText = this.value; saveAll(); };
+            document.getElementById('settingsCurrency').oninput = function () { settings.currency = this.value || '$'; saveAll(); renderAll(); };
+            document.getElementById('darkModeToggle').onchange = function () { settings.darkMode = this.checked; document.body.classList.toggle('dark', this.checked); saveAll(); };
+            document.getElementById('businessLogoUpload').onchange = e => { const file = e.target.files[0]; if (file) { const reader = new FileReader(); reader.onload = ev => { settings.logoBase64 = ev.target.result; saveAll(); applyUI(); updateBusinessCard(); }; reader.readAsDataURL(file); } };
+            document.getElementById('saveBusinessInfoBtn').onclick = saveBusinessInfoAndShowCard;
+            document.getElementById('shareCardBtn').onclick = () => { const text = `📇 ${settings.businessName}\n📞 ${settings.phone || ''}\n✉️ ${settings.email || ''}`; if (navigator.share) navigator.share({ title: 'Mi tarjeta', text }); else showAlert(text); };
+            document.getElementById('downloadCardImageBtn').onclick = () => { const el = document.querySelector('#businessCardBeauty'); if (el) html2canvas(el, { scale: 2 }).then(c => { const a = document.createElement('a'); a.download = 'tarjeta.png'; a.href = c.toDataURL(); a.click(); }); };
+            document.getElementById('qrProductSelect').onchange = function () { const id = this.value; const container = document.getElementById('qrContainer'); if (!id) { container.style.display = 'none'; return; } container.style.display = 'block'; document.getElementById('qrCanvas').innerHTML = ''; const p = products.find(x => x.id === id); if (p) new QRCode(document.getElementById('qrCanvas'), { text: `${p.name} - ${settings.currency}${p.price}`, width: 150, height: 150 }); };
+            document.getElementById('btnDownloadQr').onclick = () => { const canvas = document.querySelector('#qrCanvas canvas'); if (canvas) { const a = document.createElement('a'); a.download = 'qr.png'; a.href = canvas.toDataURL(); a.click(); } };
+            const msgArea = document.getElementById('defaultWhatsAppMessage'); msgArea.addEventListener('input', () => { msgArea.dataset.userEdited = 'true'; updateSupportUI(); });
+            document.getElementById('copyMessageBtn').onclick = () => { navigator.clipboard.writeText(msgArea.value); showAlert('Mensaje copiado'); };
+            document.getElementById('sendWithMessageBtn').onclick = () => { updateSupportUI(); const link = document.getElementById('whatsappLink').href; if (link && link.includes('wa.me')) window.open(link, '_blank'); else showAlert('Configura un número de WhatsApp en Configuración'); };
+            document.getElementById('helpButton').onclick = () => startTutorial();
+            document.querySelectorAll('.sidebar-nav button, .mobile-nav-inner button[data-panel]').forEach(btn => btn.addEventListener('click', () => navigateTo(btn.dataset.panel)));
+            const moreBtn = document.getElementById('btnMoreMenu'); const moreMenu = document.getElementById('moreMenu'); const menuItems = ['dashboard', 'support', 'businesscard', 'qr', 'history', 'settings']; const icons = { dashboard: 'fa-chart-line', support: 'fa-headset', businesscard: 'fa-id-card', qr: 'fa-qrcode', history: 'fa-history', settings: 'fa-cog' }; const names = { dashboard: 'Dashboard', support: 'Atención', businesscard: 'Tarjeta', qr: 'QR', history: 'Historial', settings: 'Config' }; moreMenu.innerHTML = menuItems.map(p => `<button data-panel="${p}"><i class="fas ${icons[p]}"></i> ${names[p]}</button>`).join(''); moreMenu.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => { navigateTo(btn.dataset.panel); moreMenu.style.display = 'none'; })); moreBtn.addEventListener('click', (e) => { e.stopPropagation(); moreMenu.style.display = moreMenu.style.display === 'flex' ? 'none' : 'flex'; }); document.addEventListener('click', (e) => { if (!e.target.closest('#btnMoreMenu') && !e.target.closest('#moreMenu')) moreMenu.style.display = 'none'; });
+            let startX; document.querySelector('.main')?.addEventListener('touchstart', (e) => startX = e.touches[0].clientX); document.querySelector('.main')?.addEventListener('touchend', () => { if (startX && startX < 40) document.getElementById('sidebar')?.classList.toggle('open'); else if (window.innerWidth <= 900) document.getElementById('sidebar')?.classList.remove('open'); });
+        }
+
+        // ---------- INICIALIZACIÓN Y SETUP ----------
+        const isFirstTime = !localStorage.getItem(STORAGE.settings);
+        if (isFirstTime) {
+            const setupDiv = document.createElement('div'); setupDiv.className = 'modal-overlay'; setupDiv.style.display = 'flex'; setupDiv.id = 'setupModal';
+            setupDiv.innerHTML = `<div class="modal-card"><h2><i class="fas fa-handshake"></i> Bienvenido</h2><p>Configura tu negocio para empezar</p><label>Nombre del negocio</label><input id="setupBusinessName" placeholder="Ej: Cafetería"><label>Moneda</label><input id="setupCurrency" value="$" maxlength="3"><button class="btn btn-accent" id="completeSetupBtn" style="margin-top:20px; width:100%;">Iniciar</button></div>`;
+            document.body.appendChild(setupDiv);
+            document.getElementById('completeSetupBtn').onclick = async () => {
+                const biz = document.getElementById('setupBusinessName').value.trim();
+                if (!biz) return;
+                settings.businessName = biz;
+                settings.currency = document.getElementById('setupCurrency').value.trim() || '$';
+                saveAll();
+                document.getElementById('setupModal').remove();
+                loadAll();
+                ensureDemoData();
+                applyUI();
+                initEvents();
+                renderAll();
+                updateSupportUI();
+                const wantsTour = await showConfirm('¿Desea realizar un recorrido guiado por las funciones principales?', '🎓 Tutorial');
+                if (wantsTour) startTutorial();
+            };
+        } else {
+            loadAll();
+            ensureDemoData();
+            applyUI();
+            initEvents();
+            renderAll();
+            updateSupportUI();
+        }
+    })();
+</script>
 </body>
 </html>
